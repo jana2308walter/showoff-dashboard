@@ -1,8 +1,8 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
-import { routes } from './app.routes';
+import { routes } from './etd.routes';
 
-export const appConfig: ApplicationConfig = {
+export const etdConfig: ApplicationConfig = {
   providers: [provideBrowserGlobalErrorListeners(), provideRouter(routes)]
 };
