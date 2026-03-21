@@ -1,7 +1,5 @@
 extends:
   - stylelint-config-standard-scss
-  - stylelint-prettier/recommended
-  - stylelint-config-prettier
 
 plugins:
   - stylelint-order
