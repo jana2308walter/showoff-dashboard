@@ -1,0 +1,11 @@
+@use '../base/sizes';
+
+.content {
+  grid-area: content;
+  background-color: lawngreen;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: sizes.$spacing6;
+}
