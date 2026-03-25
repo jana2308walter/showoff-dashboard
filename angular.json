@@ -62,10 +62,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "equi-track-dashboard:build:production"
+              "buildTarget": "showoff-dashboard:build:production"
             },
             "development": {
-              "buildTarget": "equi-track-dashboard:build:development"
+              "buildTarget": "showoff-dashboard:build:development"
             }
           },
           "defaultConfiguration": "development"

@@ -1,5 +1,5 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { etdConfig } from './app/etd.config';
-import { EtdComponent } from './app/etd.component';
+import { showoffDashboardConfig } from './app/showoff-dashboard.config';
+import { ShowoffDashboardComponent } from './app/showoff-dashboard.component';
 
-bootstrapApplication(EtdComponent, etdConfig).catch((err) => console.error(err));
+bootstrapApplication(ShowoffDashboardComponent, showoffDashboardConfig).catch((err) => console.error(err));

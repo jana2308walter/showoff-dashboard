@@ -1,15 +1,15 @@
 import { TestBed } from '@angular/core/testing';
-import { EtdComponent } from './etd.component';
+import { ShowoffDashboardComponent } from './showoff-dashboard.component';
 
-describe('Equi-Track-Dashboard', () => {
+describe('Showoff-Dashboard', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EtdComponent]
+      imports: [ShowoffDashboardComponent]
     }).compileComponents();
   });
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(EtdComponent);
+    const fixture = TestBed.createComponent(ShowoffDashboardComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
   });
