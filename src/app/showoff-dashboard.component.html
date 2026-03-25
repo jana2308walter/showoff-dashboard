@@ -1,88 +1,26 @@
-<div class="top-bar">
-  <input id="search" />
-  <span>Logo</span>
-  <p>Dies ist die Headerleiste</p>
-  <button>Your name</button>
-</div>
+<sod-layout>
+  <sod-logo></sod-logo>
+  <sod-header></sod-header>
+  <sod-aside></sod-aside>
 
-<div class="side-bar">
-  <div>Menu Here</div>
-  <div>
-    <ul>
-      @for (item of sidebarItems; track item) {
-        <li>Lorem Ipsum</li>
-      }
-    </ul>
-  </div>
-</div>
+  <sod-content>
+    <sod-card-row>
+      <sod-card></sod-card>
+      <sod-card></sod-card>
+      <sod-card></sod-card>
+      <sod-card></sod-card>
+    </sod-card-row>
 
-<div class="card-row">
-  <div class="card">
-    <p>Lorem Ipsum</p>
-    <p>Dolor sit amet</p>
-    <p>87%</p>
-  </div>
+    <sod-card-row>
+      <sod-card></sod-card>
+      <sod-card></sod-card>
+    </sod-card-row>
 
-  <div class="card">
-    <p>Lorem Ipsum</p>
-    <p>Dolor sit amet</p>
-    <p>1,503</p>
-  </div>
-
-  <div class="card">
-    <p>Lorem Ipsum</p>
-    <p>Dolor sit amet</p>
-    <p>2,450</p>
-  </div>
-
-  <div class="card">
-    <p>Lorem Ipsum</p>
-    <p>Dolor sit amet</p>
-    <p>4,220</p>
-  </div>
-</div>
-
-<div class="card-row">
-  <div class="card">Lorem Ipsum</div>
-  <div class="card">75%</div>
-</div>
-
-<div class="card-row">
-  <div class="card">
-    <p>Lorem Ipsum</p>
-    <p>Dolor sit amet</p>
-    <p>
-      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-      invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-    </p>
-  </div>
-
-  <div class="card">
-    <p>Lorem Ipsum</p>
-    <p>Dolor sit amet</p>
-    <p>
-      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-      invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-    </p>
-  </div>
-
-  <div class="card">
-    <p>Lorem Ipsum</p>
-    <p>Dolor sit amet</p>
-    <p>
-      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-      invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-    </p>
-  </div>
-
-  <div class="card">
-    <p>Lorem Ipsum</p>
-    <p>Dolor sit amet</p>
-    <p>Lorem ipsum dolor</p>
-    <p>Lorem ipsum dolor</p>
-    <p>Lorem ipsum dolor</p>
-    <p>Lorem ipsum dolor</p>
-    <p>Lorem</p>
-    <p>Lorem</p>
-  </div>
-</div>
+    <sod-card-row>
+      <sod-card></sod-card>
+      <sod-card></sod-card>
+      <sod-card></sod-card>
+      <sod-card></sod-card>
+    </sod-card-row>
+  </sod-content>
+</sod-layout>
