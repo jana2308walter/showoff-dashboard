@@ -5,4 +5,6 @@ import { Component } from '@angular/core';
   imports: [],
   templateUrl: './showoff-dashboard.component.html'
 })
-export class ShowoffDashboardComponent {}
+export class ShowoffDashboardComponent {
+  protected sidebarItems = Array.from({ length: 7 }, (_, i) => i);
+}
