@@ -2,10 +2,11 @@
 
 .content {
   grid-area: content;
-  background-color: lawngreen;
+  background-color: var(--background-grey-dark);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: sizes.$spacing6;
+  padding: sizes.$spacing6;
 }
