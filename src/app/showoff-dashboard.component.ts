@@ -6,6 +6,7 @@ import { CardRowComponent } from '../components/card-row/card-row.component';
 import { ContentComponent } from '../components/content/content.component';
 import { LayoutComponent } from '../components/layout/layout-component';
 import { LogoComponent } from '../components/logo/logo-component';
+import { AsideEntryComponent } from '../components/aside-entry/aside-entry.component';
 
 @Component({
   selector: 'sod-root',
@@ -16,7 +17,8 @@ import { LogoComponent } from '../components/logo/logo-component';
     CardRowComponent,
     ContentComponent,
     LayoutComponent,
-    LogoComponent
+    LogoComponent,
+    AsideEntryComponent
   ],
   templateUrl: './showoff-dashboard.component.html'
 })
