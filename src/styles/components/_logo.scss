@@ -1,4 +1,16 @@
+@use '../base/sizes';
+@use '../base/typography';
+
 .logo {
+  @include typography.bold-text;
+
   grid-area: logo;
-  background-color: fuchsia;
+  background-color: var(--menu-blue-light);
+  color: var(--background-white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: sizes.$spacing6;
+  gap: sizes.$spacing5;
+  text-transform: uppercase;
 }
