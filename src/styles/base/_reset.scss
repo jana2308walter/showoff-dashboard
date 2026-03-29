@@ -15,6 +15,12 @@
 html {
   text-size-adjust: 100%;
   text-rendering: optimizelegibility;
+  font-size: 16px;
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    sans-serif;
 }
 
 /* Body defaults */
@@ -35,6 +41,10 @@ ol {
 a {
   text-decoration: none;
   color: inherit;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 /* Reset images */
