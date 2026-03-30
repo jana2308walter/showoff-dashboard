@@ -1,0 +1,37 @@
+@use '../base/typography';
+
+.headline {
+  text-transform: uppercase;
+
+  &.is-left {
+    text-align: left;
+  }
+
+  &.is-center {
+    text-align: center;
+  }
+}
+
+.headline__title {
+  @include typography.headline-3;
+
+  &.is-mint-m {
+    color: var(--mint-m);
+  }
+
+  &.is-blue-md {
+    color: var(--blue-md);
+  }
+
+  &.is-grey-d {
+    color: var(--grey-d);
+  }
+}
+
+.headline__subtitle {
+  @include typography.headline-4;
+
+  &.is-grey-md {
+    color: var(--grey-md);
+  }
+}

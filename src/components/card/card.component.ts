@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'sod-card',
@@ -8,4 +8,9 @@ import { Component } from '@angular/core';
     class: 'card'
   }
 })
-export class CardComponent {}
+export class CardComponent {
+  @Input() title = 'Lorem Ipsum';
+  @Input() titleColor: 'mint' | 'blue' | 'grey' = 'grey';
+  @Input() subtitle = 'Dolor sit amet';
+  @Input() alignment: 'left' | 'center' = 'left';
+}
