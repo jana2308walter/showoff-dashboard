@@ -1,5 +1,5 @@
 @use '../generic/button';
 
 .aside-entry__button {
-  @include button.button-color(var(--white), var(--menu-blue-light));
+  @include button.button-color(var(--white), var(--blue-m));
 }

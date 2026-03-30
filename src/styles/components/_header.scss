@@ -18,8 +18,8 @@
   &.is-disabled,
   & .search__input:disabled {
     cursor: not-allowed;
-    background-color: var(--grey-light);
-    color: var(--grey-dark);
+    background-color: var(--grey-l);
+    color: var(--grey-lm);
   }
 }
 
@@ -27,7 +27,7 @@
   padding: sizes.$spacing3;
 
   &::placeholder {
-    color: var(--grey-dark);
+    color: var(--grey-lm);
   }
 }
 
@@ -41,6 +41,6 @@
   display: flex;
   align-items: center;
   padding: sizes.$spacing2;
-  color: var(--grey-dark);
-  background-color: var(--grey-light);
+  color: var(--grey-lm);
+  background-color: var(--grey-l);
 }

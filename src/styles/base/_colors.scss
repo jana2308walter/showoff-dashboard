@@ -1,14 +1,23 @@
+// Color Specific:
+//  - Light: l
+//  - Medium-Light: lm
+//  - Medium: m
+//  - Medium-dark: md
+//  - Dark: d
+
 :root {
-  --accent-blue-light: #81f4ff;
-  --accent-blue-medium: #4ca0de;
-  --accent-blue-dark: #1249bd;
-  --accent-green-light: #95f8b5;
-  --accent-green-medium: #53d4d0;
-  --accent-green-dark: #0fb7e4;
-  --menu-blue-light: #3583ff;
-  --menu-blue-dark: #022ab0;
-  --grey-light: #d9e5fb;
-  --grey-dark: #b0c4e5;
+  --blue-l: #81f4ff;
+  --blue-lm: #4ca0de;
+  --blue-m: #3583ff;
+  --blue-md: #1249bd;
+  --blue-d: #022ab0;
+  --mint-l: #95f8b5;
+  --mint-m: #53d4d0;
+  --mint-d: #0fb7e4;
+  --grey-l: #d9e5fb;
+  --grey-lm: #b0c4e5;
+  --grey-md: #646464;
+  --grey-d: #323232;
   --white: #fff;
   --black: #000;
 }
