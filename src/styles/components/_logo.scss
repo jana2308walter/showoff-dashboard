@@ -1,16 +1,18 @@
 @use '../base/sizes';
 @use '../base/typography';
+@use '../generic/button';
 
 .logo {
-  @include typography.bold-text;
-
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding: sizes.$spacing8;
-  color: var(--background-white);
   grid-area: logo;
+  padding: sizes.$spacing8;
   background-color: var(--menu-blue-light);
+}
+
+.logo__button {
+  @include typography.bold-text;
+  @include button.button-color(var(--white), var(--menu-blue-dark));
+
+  justify-content: flex-start;
   gap: sizes.$spacing5;
   text-transform: uppercase;
 }
