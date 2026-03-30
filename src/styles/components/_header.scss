@@ -1,13 +1,13 @@
 @use '../base/sizes';
 
 .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: sizes.$spacing6 sizes.$spacing8;
+  color: var(--background-black);
   grid-area: header;
   background-color: var(--background-white);
-  color: var(--background-black);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: sizes.$spacing6 sizes.$spacing8;
 }
 
 .search {
@@ -38,9 +38,9 @@
 }
 
 .user-panel__icon {
-  color: var(--background-grey-dark);
-  background-color: var(--background-grey-light);
   display: flex;
   align-items: center;
   padding: sizes.$spacing2;
+  color: var(--background-grey-dark);
+  background-color: var(--background-grey-light);
 }

@@ -38,16 +38,16 @@ $standard-font-size: sizes.$spacing6;
 }
 
 @mixin bold-text {
-  font-weight: 500;
   font-size: $standard-font-size;
+  font-weight: 500;
 }
 
 @mixin text {
-  font-weight: 400;
   font-size: $standard-font-size;
+  font-weight: 400;
 }
 
 @mixin small-text {
-  font-weight: 300;
   font-size: $standard-font-size;
+  font-weight: 300;
 }

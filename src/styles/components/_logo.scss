@@ -4,13 +4,13 @@
 .logo {
   @include typography.bold-text;
 
-  grid-area: logo;
-  background-color: var(--menu-blue-light);
-  color: var(--background-white);
   display: flex;
   justify-content: flex-start;
   align-items: center;
   padding: sizes.$spacing8;
+  color: var(--background-white);
+  grid-area: logo;
+  background-color: var(--menu-blue-light);
   gap: sizes.$spacing5;
   text-transform: uppercase;
 }

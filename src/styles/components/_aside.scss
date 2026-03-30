@@ -1,12 +1,12 @@
 @use '../base/sizes';
 
 .aside {
-  grid-area: aside;
-  background-color: var(--menu-blue-dark);
-  color: var(--background-white);
-  padding: sizes.$spacing8;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  padding: sizes.$spacing8;
+  color: var(--background-white);
+  grid-area: aside;
+  background-color: var(--menu-blue-dark);
   gap: sizes.$spacing6;
 }

@@ -3,3 +3,53 @@ extends:
 
 plugins:
   - stylelint-order
+
+rules:
+  selector-class-pattern:
+      - "^[a-z]+(-[a-z]+)*(__[a-z]+(-[a-z]+)*)?(--[a-z]+(-[a-z]+)*)?$"
+      - {}
+  max-nesting-depth:
+      - 2
+      - {}
+  selector-max-compound-selectors:
+      - 3
+      - {}
+  scss/at-rule-no-unknown: true
+  color-hex-length: short
+  declaration-no-important: true
+  no-duplicate-selectors: true
+  selector-max-id: 0
+  selector-no-qualifying-type: true
+  order/properties-order:
+      - position
+      - top
+      - right
+      - bottom
+      - left
+      - z-index
+
+      - display
+      - flex
+      - flex-direction
+      - justify-content
+      - align-items
+
+      - width
+      - height
+      - margin
+      - padding
+
+      - font
+      - font-size
+      - font-weight
+      - line-height
+      - text-align
+      - color
+
+      - background
+      - border
+      - border-radius
+
+      - opacity
+      - transition
+      - transform
