@@ -5,9 +5,9 @@
   justify-content: space-between;
   align-items: center;
   padding: sizes.$spacing6 sizes.$spacing8;
-  color: var(--background-black);
+  color: var(--black);
   grid-area: header;
-  background-color: var(--background-white);
+  background-color: var(--white);
 }
 
 .search {
@@ -18,8 +18,8 @@
   &.is-disabled,
   & .search__input:disabled {
     cursor: not-allowed;
-    background-color: var(--background-grey-light);
-    color: var(--background-grey-dark);
+    background-color: var(--grey-light);
+    color: var(--grey-dark);
   }
 }
 
@@ -27,7 +27,7 @@
   padding: sizes.$spacing3;
 
   &::placeholder {
-    color: var(--background-grey-dark);
+    color: var(--grey-dark);
   }
 }
 
@@ -41,6 +41,6 @@
   display: flex;
   align-items: center;
   padding: sizes.$spacing2;
-  color: var(--background-grey-dark);
-  background-color: var(--background-grey-light);
+  color: var(--grey-dark);
+  background-color: var(--grey-light);
 }
