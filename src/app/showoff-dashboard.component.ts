@@ -7,6 +7,7 @@ import { ContentComponent } from '../components/content/content.component';
 import { LayoutComponent } from '../components/layout/layout-component';
 import { LogoComponent } from '../components/logo/logo-component';
 import { AsideEntryComponent } from '../components/aside-entry/aside-entry.component';
+import { TextDirective } from '../directives/text/text.directive';
 
 @Component({
   selector: 'sod-root',
@@ -18,7 +19,8 @@ import { AsideEntryComponent } from '../components/aside-entry/aside-entry.compo
     ContentComponent,
     LayoutComponent,
     LogoComponent,
-    AsideEntryComponent
+    AsideEntryComponent,
+    TextDirective
   ],
   templateUrl: './showoff-dashboard.component.html'
 })

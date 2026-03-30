@@ -1,0 +1,7 @@
+@use '../base/sizes';
+
+.text {
+  font-size: sizes.$spacing9;
+  font-weight: 700;
+  color: var(--grey-d);
+}

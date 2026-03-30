@@ -14,6 +14,9 @@
 @use 'styles/components/layout';
 @use 'styles/components/logo';
 
+// Directives
+@use 'styles/directives/text';
+
 // Generic Styles
 @use 'styles/generic/button';
 @use 'styles/generic/headline';

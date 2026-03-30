@@ -3,7 +3,8 @@
 .layout {
   display: grid;
   width: 100vw;
-  height: 100vh;
+  height: auto;
+  overflow-y: auto;
   grid-template-columns: sizes.$spacing22 auto;
   grid-auto-rows: sizes.$spacing11 auto;
   grid-template-areas:

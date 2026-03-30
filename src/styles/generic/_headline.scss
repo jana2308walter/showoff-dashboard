@@ -15,12 +15,14 @@
 .headline__title {
   @include typography.headline-3;
 
+  font-weight: 500;
+
   &.is-mint-m {
     color: var(--mint-m);
   }
 
-  &.is-blue-md {
-    color: var(--blue-md);
+  &.is-blue-m {
+    color: var(--blue-d);
   }
 
   &.is-grey-d {
@@ -30,6 +32,8 @@
 
 .headline__subtitle {
   @include typography.headline-4;
+
+  font-weight: 500;
 
   &.is-grey-md {
     color: var(--grey-md);

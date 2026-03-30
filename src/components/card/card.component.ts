@@ -5,7 +5,9 @@ import { Component, Input } from '@angular/core';
   imports: [],
   templateUrl: './card.component.html',
   host: {
-    class: 'card'
+    class: 'card',
+    '[class.is-left]': 'alignment === "left"',
+    '[class.is-center]': 'alignment === "center"'
   }
 })
 export class CardComponent {
