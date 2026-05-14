@@ -1,3 +1,18 @@
+import { CurrentWeatherWithTime } from './current-weather';
+import { DailyWeatherWithTimes } from './daily-weather';
+import { HourlyWeatherWithTimes } from './hourly-weather';
+
+export interface Weather {
+  current: CurrentWeatherWithTime | null;
+  hourly: HourlyWeatherWithTimes | null;
+  daily: DailyWeatherWithTimes | null;
+}
+
+export interface Coordinates {
+  latitude: number;
+  longitude: number;
+}
+
 /*
 WMO Weather interpretation codes (WW)
 Code	Description
