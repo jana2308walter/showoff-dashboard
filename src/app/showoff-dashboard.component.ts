@@ -1,27 +1,35 @@
-import { Component } from '@angular/core';
-import { HeaderComponent } from '../components/header/header.component';
-import { AsideComponent } from '../components/aside/aside.component';
-import { CardComponent } from '../components/card/card.component';
-import { CardRowComponent } from '../components/card-row/card-row.component';
-import { ContentComponent } from '../components/content/content.component';
-import { LayoutComponent } from '../components/layout/layout-component';
-import { LogoComponent } from '../components/logo/logo-component';
-import { AsideEntryComponent } from '../components/aside-entry/aside-entry.component';
-import { TextDirective } from '../directives/text/text.directive';
+import { Component, effect, resource, signal } from '@angular/core';
+import { Coordinates, getWeatherData } from '../model/api-methods';
 
 @Component({
   selector: 'sod-root',
-  imports: [
-    HeaderComponent,
-    AsideComponent,
-    CardComponent,
-    CardRowComponent,
-    ContentComponent,
-    LayoutComponent,
-    LogoComponent,
-    AsideEntryComponent,
-    TextDirective
-  ],
+  imports: [],
   templateUrl: './showoff-dashboard.component.html'
 })
-export class ShowoffDashboardComponent {}
+export class ShowoffDashboardComponent {
+  private readonly $coordinates = signal<Coordinates>({
+    latitude: 47.92,
+    longitude: 7.79
+  });
+
+  protected readonly $weather = resource({
+    params: () => this.$coordinates(),
+    loader: async ({ params }) => {
+      return await getWeatherData(params.latitude, params.longitude);
+    }
+  }).asReadonly();
+
+  constructor() {
+    effect(() => {
+      const weather = this.$weather.value();
+
+      const current = weather?.current;
+      const hourly = weather?.hourly;
+      const daily = weather?.daily;
+
+      console.log('%cCurrent', 'color: cyan', current);
+      console.log('%cHourly', 'color: fuchsia', hourly);
+      console.log('%cDaily', 'color: orange', daily);
+    });
+  }
+}
