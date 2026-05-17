@@ -1,75 +1,10 @@
-<div [formGroup]="form">
-  <div>
-    <label for="latitude">Latitude:</label>
-    <input
-      id="latitude"
-      placeholder="z. B. 47.92"
-      type="number"
-      min="-90"
-      max="90"
-      formControlName="latitude"
-    />
-
-    @if (form.controls.latitude.errors?.['required']) {
-      <p>Die Latitude muss gesetzt werden!</p>
-    }
-
-    @if (form.controls.latitude.errors?.['min'] || form.controls.latitude.errors?.['max']) {
-      <p>Die Latitude muss zwischen -90 und 90 liegen!</p>
-    }
-  </div>
-  <div>
-    <label for="longitude">Longitude:</label>
-    <input
-      id="longitude"
-      placeholder="z. B. 7.79"
-      type="number"
-      min="-180"
-      max="180"
-      formControlName="longitude"
-    />
-
-    @if (form.controls.longitude.errors?.['required']) {
-      <p>Die Longitude muss gesetzt werden!</p>
-    }
-
-    @if (form.controls.longitude.errors?.['min'] || form.controls.longitude.errors?.['max']) {
-      <p>Die Longitude muss zwischen -180 und 180 liegen!</p>
-    }
-  </div>
-
-  <div>
-    <button type="button" (click)="checkWeather()">Wetter abfragen</button>
-  </div>
-</div>
+<aside>
+  <a [routerLink]="'/coordinates'">Koordinaten</a>
+  <a [routerLink]="'/weather/current'">Aktuelles Wetter</a>
+  <a [routerLink]="'/weather/hourly'">Stündliches Wetter</a>
+  <a [routerLink]="'/weather/daily'">Tägliches Wetter</a>
+</aside>
 
 <div>
-  @if ($weather.hasValue()) {
-    <div>
-      @if ($currentWeather(); as current) {
-        <div>
-          <h5>Aktuelles Wetter</h5>
-          <p>{{ current | json }}</p>
-        </div>
-      }
-
-      @if ($hourlyWeather(); as hourly) {
-        <div>
-          <h5>Stündliches Wetter</h5>
-          <p>{{ hourly | json }}</p>
-        </div>
-      }
-
-      @if ($dailyWeather(); as daily) {
-        <div>
-          <h5>Tägliches Wetter</h5>
-          <p>{{ daily | json }}</p>
-        </div>
-      }
-    </div>
-  } @else if ($weather.isLoading()) {
-    <div>Loading...</div>
-  } @else if ($weather.error()) {
-    <div>Etwas ist schiefgelaufen, bitte versuchen sie es erneut!</div>
-  }
+  <router-outlet></router-outlet>
 </div>

@@ -1,0 +1,4 @@
+@if ($dailyWeather(); as daily) {
+  <h5>Tägliches Wetter</h5>
+  <p>{{ daily | json }}</p>
+}

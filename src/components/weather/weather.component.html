@@ -1,0 +1,9 @@
+@if ($weather.hasValue()) {
+  <router-outlet></router-outlet>
+} @else if ($weather.isLoading()) {
+  <sod-weather-loading></sod-weather-loading>
+} @else if ($weather.error()) {
+  <sod-weather-error [reason]="'error'"></sod-weather-error>
+} @else {
+  <sod-weather-error [reason]="'missingCoordinates'"></sod-weather-error>
+}

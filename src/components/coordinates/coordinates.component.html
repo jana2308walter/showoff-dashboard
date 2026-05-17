@@ -1,0 +1,45 @@
+<div [formGroup]="form">
+  <div>
+    <label for="latitude">Latitude:</label>
+    <input
+      id="latitude"
+      placeholder="z. B. 47.92"
+      type="number"
+      min="-90"
+      max="90"
+      formControlName="latitude"
+    />
+
+    @if (latitudeControl.errors?.['required']) {
+      <p>Die Latitude muss gesetzt werden!</p>
+    }
+
+    @if (latitudeControl.errors?.['min'] || latitudeControl.errors?.['max']) {
+      <p>Die Latitude muss zwischen -90 und 90 liegen!</p>
+    }
+  </div>
+
+  <div>
+    <label for="longitude">Longitude:</label>
+    <input
+      id="longitude"
+      placeholder="z. B. 7.79"
+      type="number"
+      min="-180"
+      max="180"
+      formControlName="longitude"
+    />
+
+    @if (longitudeControl.errors?.['required']) {
+      <p>Die Longitude muss gesetzt werden!</p>
+    }
+
+    @if (longitudeControl.errors?.['min'] || longitudeControl.errors?.['max']) {
+      <p>Die Longitude muss zwischen -180 und 180 liegen!</p>
+    }
+  </div>
+
+  <div>
+    <button type="button" (click)="setCoordinates()">Wetter abfragen</button>
+  </div>
+</div>

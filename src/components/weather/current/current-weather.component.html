@@ -1,0 +1,4 @@
+@if ($currentWeather(); as current) {
+  <h5>Aktuelles Wetter</h5>
+  <p>{{ current | json }}</p>
+}

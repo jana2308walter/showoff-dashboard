@@ -1,0 +1,4 @@
+@if ($hourlyWeather(); as hourly) {
+  <h5>Stündliches Wetter</h5>
+  <p>{{ hourly | json }}</p>
+}
