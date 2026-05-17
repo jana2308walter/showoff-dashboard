@@ -13,20 +13,38 @@ export interface Coordinates {
   longitude: number;
 }
 
-/*
-WMO Weather interpretation codes (WW)
-Code	Description
-0	Clear sky
-1, 2, 3	Mainly clear, partly cloudy, and overcast
-45, 48	Fog and depositing rime fog
-51, 53, 55	Drizzle: Light, moderate, and dense intensity
-56, 57	Freezing Drizzle: Light and dense intensity
-61, 63, 65	Rain: Slight, moderate and heavy intensity
-66, 67	Freezing Rain: Light and heavy intensity
-71, 73, 75	Snow fall: Slight, moderate, and heavy intensity
-77	Snow grains
-80, 81, 82	Rain showers: Slight, moderate, and violent
-85, 86	Snow showers slight and heavy
-95 *	Thunderstorm: Slight or moderate
-96, 99 *	Thunderstorm with slight and heavy hail
- */
+interface WeatherCodeText {
+  de: string;
+  en: string;
+}
+
+export const WEATHER_CODES: Record<number, WeatherCodeText> = {
+  0: { de: 'Klarer Himmel', en: 'Clear sky' },
+  1: { de: 'Überwiegend klar', en: 'Mainly clear' },
+  2: { de: 'Teilweise bewölkt', en: 'Partly cloudy' },
+  3: { de: 'Bedeckt', en: 'Overcast' },
+  45: { de: 'Nebel', en: 'Fog' },
+  48: { de: 'Raureifnebel', en: 'Depositing rime fog' },
+  51: { de: 'Leichter Nieselregen', en: 'Light drizzle' },
+  53: { de: 'Mäßiger Nieselregen', en: 'Moderate drizzle' },
+  55: { de: 'Starker Nieselregen', en: 'Dense drizzle' },
+  56: { de: 'Leichter gefrierender Nieselregen', en: 'Light freezing drizzle' },
+  57: { de: 'Starker gefrierender Nieselregen', en: 'Dense freezing drizzle' },
+  61: { de: 'Leichter Regen', en: 'Slight rain' },
+  63: { de: 'Mäßiger Regen', en: 'Moderate rain' },
+  65: { de: 'Starker Regen', en: 'Heavy rain' },
+  66: { de: 'Leichter gefrierender Regen', en: 'Light freezing rain' },
+  67: { de: 'Starker gefrierender Regen', en: 'Heavy freezing rain' },
+  71: { de: 'Leichter Schneefall', en: 'Slight snow fall' },
+  73: { de: 'Mäßiger Schneefall', en: 'Moderate snow fall' },
+  75: { de: 'Starker Schneefall', en: 'Heavy snow fall' },
+  77: { de: 'Schneegriesel', en: 'Snow grains' },
+  80: { de: 'Leichte Regenschauer', en: 'Slight rain showers' },
+  81: { de: 'Mäßige Regenschauer', en: 'Moderate rain showers' },
+  82: { de: 'Starke Regenschauer', en: 'Violent rain showers' },
+  85: { de: 'Leichte Schneeschauer', en: 'Slight snow showers' },
+  86: { de: 'Starke Schneeschauer', en: 'Heavy snow showers' },
+  95: { de: 'Gewitter', en: 'Thunderstorm' },
+  96: { de: 'Gewitter mit leichtem Hagel', en: 'Thunderstorm with slight hail' },
+  99: { de: 'Gewitter mit starkem Hagel', en: 'Thunderstorm with heavy hail' }
+};
