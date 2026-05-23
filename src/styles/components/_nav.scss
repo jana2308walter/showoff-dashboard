@@ -1,0 +1,33 @@
+@use '../base/sizes';
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  grid-area: nav;
+  gap: sizes.$spacing6;
+  padding: sizes.$spacing7;
+  background-color: var(--cyan);
+}
+
+.nav__item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: sizes.$spacing5;
+
+  &:hover,
+  &:active,
+  &:focus,
+  &:visited,
+  &.is-active {
+    .icon {
+      text-decoration: none;
+    }
+
+    .label {
+      text-decoration: underline;
+    }
+  }
+}

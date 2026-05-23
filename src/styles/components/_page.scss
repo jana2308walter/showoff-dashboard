@@ -1,0 +1,14 @@
+@use '../base/sizes';
+
+.page {
+  display: grid;
+  grid-template: 'nav content' auto / sizes.$spacing22 auto;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+}
+
+.content {
+  grid-area: content;
+  padding: sizes.$spacing7;
+}

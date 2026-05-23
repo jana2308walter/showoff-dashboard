@@ -1,10 +1,18 @@
-<aside>
-  <a [routerLink]="'/coordinates'">Koordinaten</a>
-  <a [routerLink]="'/weather/current'">Aktuelles Wetter</a>
-  <a [routerLink]="'/weather/hourly'">Stündliches Wetter</a>
-  <a [routerLink]="'/weather/daily'">Tägliches Wetter</a>
-</aside>
+<div class="page">
+  <aside class="nav">
+    @for (item of navItems; track item.id) {
+      <a
+        [routerLink]="item.link"
+        class="nav__item"
+        [class.is-active]="$actualRoute() === item.link"
+      >
+        <span class="material-symbols-outlined icon">{{ item.iconName }}</span>
+        <span class="label">{{ item.label }}</span>
+      </a>
+    }
+  </aside>
 
-<div>
-  <router-outlet></router-outlet>
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
 </div>

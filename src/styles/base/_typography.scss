@@ -28,7 +28,7 @@ $standard-font-size: sizes.$spacing6;
 @mixin headline-4 {
   @include headlines;
 
-  font-size: sizes.$spacing6;
+  font-size: $standard-font-size;
 }
 
 @mixin bold-text {
