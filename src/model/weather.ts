@@ -1,9 +1,9 @@
-import { CurrentWeatherWithTime } from './current-weather';
+import { CurrentWeather } from './current-weather';
 import { DailyWeatherWithTimes } from './daily-weather';
 import { HourlyWeatherWithTimes } from './hourly-weather';
 
 export interface Weather {
-  current: CurrentWeatherWithTime | null;
+  current: CurrentWeather[] | null;
   hourly: HourlyWeatherWithTimes | null;
   daily: DailyWeatherWithTimes | null;
 }

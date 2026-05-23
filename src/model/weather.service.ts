@@ -1,11 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-  CURRENT_WEATHER_VALUES,
-  CurrentWeather,
-  currentWeatherMapping,
-  CurrentWeatherWithTime,
-  INITIAL_CURRENT_WEATHER
-} from './current-weather';
+import { CURRENT_WEATHER_CONFIG, CURRENT_WEATHER_VALUES, CurrentWeather } from './current-weather';
 import {
   HOURLY_WEATHER_VALUES,
   HourlyWeather,
@@ -98,19 +92,22 @@ export class WeatherService {
     };
   }
 
-  private getCurrentWeather(current: any, utcOffsetSeconds: number): CurrentWeatherWithTime | null {
+  private getCurrentWeather(current: any, utcOffsetSeconds: number): CurrentWeather[] | null {
     if (!current) {
       return null;
     }
 
-    const time = new Date((Number(current.time()) + utcOffsetSeconds) * 1000);
-    const result: CurrentWeather = INITIAL_CURRENT_WEATHER;
+    return CURRENT_WEATHER_CONFIG.map((item, index) => {
+      const isLast = index === CURRENT_WEATHER_CONFIG.length - 1;
+      const time = isLast ? new Date((Number(current.time()) + utcOffsetSeconds) * 1000) : NaN;
 
-    for (const item of currentWeatherMapping) {
-      result[item.key] = this.getValue(current, item.index);
-    }
-
-    return { time, ...result };
+      return {
+        key: item.key,
+        label: item.label,
+        unit: item.unit,
+        value: isLast ? time : this.getValue(current, index)
+      } as CurrentWeather;
+    });
   }
 
   private getHourlyWeather(hourly: any, utcOffsetSeconds: number): HourlyWeatherWithTimes | null {
