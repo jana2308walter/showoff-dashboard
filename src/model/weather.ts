@@ -1,11 +1,15 @@
-import { CurrentWeather } from './current-weather';
-import { DailyWeatherWithTimes } from './daily-weather';
-import { HourlyWeatherWithTimes } from './hourly-weather';
-
 export interface Weather {
-  current: CurrentWeather[] | null;
-  hourly: HourlyWeatherWithTimes | null;
-  daily: DailyWeatherWithTimes | null;
+  current: WeatherConfig[] | null;
+  hourly: WeatherConfig[] | null;
+  daily: WeatherConfig[] | null;
+}
+
+export interface WeatherConfig {
+  key: string;
+  apiKey?: string;
+  label: string;
+  unit?: string;
+  value?: number;
 }
 
 export interface Coordinates {
