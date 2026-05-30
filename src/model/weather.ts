@@ -1,7 +1,7 @@
 export interface Weather {
-  current: WeatherConfig[] | null;
-  hourly: WeatherConfigs[] | null;
-  daily: WeatherConfigs[] | null;
+  current: WeatherConfig[];
+  hourly: WeatherConfigs[];
+  daily: WeatherConfigs[];
 }
 
 export interface WeatherConfig {
@@ -17,12 +17,7 @@ export interface WeatherConfigs {
   apiKey?: string;
   label: string;
   unit?: string;
-  values?: ArrayValues[];
-}
-
-export interface ArrayValues {
-  id: string;
-  value: number;
+  values?: number[];
 }
 
 export interface Coordinates {

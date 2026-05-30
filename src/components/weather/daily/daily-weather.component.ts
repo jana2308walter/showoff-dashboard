@@ -9,7 +9,7 @@ export class DailyWeatherComponent {
   private readonly weatherService = inject(WeatherService);
 
   protected readonly $dailyWeather = computed(() => {
-    const weather = this.weatherService.$weather.value();
-    return weather?.daily;
+    const weather = this.weatherService.$weather.value;
+    return weather()?.daily ?? [];
   });
 }

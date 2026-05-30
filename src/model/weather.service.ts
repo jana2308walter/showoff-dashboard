@@ -3,9 +3,8 @@ import { HOURLY_WEATHERS } from './hourly-weather';
 import { DAILY_WEATHERS } from './daily-weather';
 import { fetchWeatherApi } from 'openmeteo';
 import { Injectable, resource, signal } from '@angular/core';
-import { ArrayValues, Coordinates, Weather, WeatherConfig, WeatherConfigs } from './weather';
+import { Coordinates, Weather, WeatherConfig, WeatherConfigs } from './weather';
 import { CURRENT_WEATHER } from './current-weather';
-import { v4 as uuidV4 } from 'uuid';
 
 @Injectable({
   providedIn: 'root'
@@ -78,9 +77,9 @@ export class WeatherService {
     };
   }
 
-  private getCurrentWeather(current: any, utcOffsetSeconds: number): WeatherConfig[] | null {
+  private getCurrentWeather(current: any, utcOffsetSeconds: number): WeatherConfig[] {
     if (!current) {
-      return null;
+      return [];
     }
 
     const time = new Date((Number(current.time()) + utcOffsetSeconds) * 1000).getTime();
@@ -95,9 +94,9 @@ export class WeatherService {
     });
   }
 
-  private getHourlyWeather(hourly: any, utcOffsetSeconds: number): WeatherConfigs[] | null {
+  private getHourlyWeather(hourly: any, utcOffsetSeconds: number): WeatherConfigs[] {
     if (!hourly) {
-      return null;
+      return [];
     }
 
     const times = this.range(
@@ -108,8 +107,7 @@ export class WeatherService {
 
     return HOURLY_WEATHERS.map((item, index) => {
       const isTimeItem = item.key === 'time';
-      const numberValues = isTimeItem ? times : this.getValueArray(hourly, index);
-      const values: ArrayValues[] = numberValues.map((item) => ({ id: uuidV4(), value: item }));
+      const values = isTimeItem ? times : this.getValueArray(hourly, index);
 
       return {
         ...item,
@@ -118,9 +116,9 @@ export class WeatherService {
     });
   }
 
-  private getDailyWeather(daily: any, utcOffsetSeconds: number): WeatherConfigs[] | null {
+  private getDailyWeather(daily: any, utcOffsetSeconds: number): WeatherConfigs[] {
     if (!daily) {
-      return null;
+      return [];
     }
 
     const times = this.range(Number(daily.time()), Number(daily.timeEnd()), daily.interval()).map(
@@ -130,14 +128,11 @@ export class WeatherService {
     return DAILY_WEATHERS.map((item, index) => {
       const isTimeItem = item.key === 'time';
       const isDateItem = item.key === 'sunrise' || item.key === 'sunset';
-      const numberValues = isTimeItem
+      const values = isTimeItem
         ? times
         : isDateItem
           ? this.getDateArray(daily, index, utcOffsetSeconds)
           : this.getValueArray(daily, index);
-      const values: ArrayValues[] = numberValues.map((item) => ({ id: uuidV4(), value: item }));
-
-      values.forEach((value) => console.log('Value', value));
 
       return {
         ...item,
@@ -162,7 +157,7 @@ export class WeatherService {
     );
   }
 
-  private mapWeatherConfigToApiKeys(weatherConfigs: WeatherConfig[]): string[] {
+  private mapWeatherConfigToApiKeys(weatherConfigs: WeatherConfig[] | WeatherConfigs[]): string[] {
     return weatherConfigs.map((weather) => weather.apiKey || '').filter(Boolean);
   }
 }
