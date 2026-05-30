@@ -1,98 +1,35 @@
-export const HOURLY_WEATHER_VALUES = [
-  'temperature_2m',
-  'apparent_temperature',
-  'relative_humidity_2m',
-  'precipitation_probability',
-  'precipitation',
-  'weather_code',
-  'surface_pressure',
-  'cloud_cover_low',
-  'cloud_cover_mid',
-  'cloud_cover_high',
-  'visibility',
-  'wind_speed_10m',
-  'wind_direction_10m',
-  'wind_gusts_10m',
-  'uv_index'
-];
+import { WeatherConfigs } from './weather';
 
-export interface HourlyWeather {
-  temperature: number[]; // Temperatur in Celsius, 2m über Boden
-  apparentTemperature: number[]; // Gefühlte Temperatur in Celsius (Kombiniert Windkühlung, Sonneneinstrahlung und Luftfeuchtigkeit)
-  humidity: number[]; // Luftfeuchtigkeit in %, 2m über Boden
-  precipitationProbability: number[]; // Niederschlagswahrscheinlichkeit in %
-  precipitation: number[]; // Niederschlagssumme in mm
-  weatherCode: number[]; // Code für das Wetter, siehe WeatherCode
-  pressure: number[]; // Luftdruck an der Oberfläche in hPa
-  cloudCoverLow: number[]; // Bedeckung durch Wolken und Nebel in bis zu 3km Höhe in %
-  cloudCoverMid: number[]; // Bedeckung durch Wolken in 3km bis 8km Höhe in %
-  cloudCoverHigh: number[]; // Bedeckung durch Wolken ab 8km Höhe in %
-  visibility: number[]; // Sichtweite in m
-  windSpeed: number[]; // Windgeschwindigkeit in km/h, 10m über Boden
-  windDirection: number[]; // Windrichtung in Grad, 10m über Boden
-  windGusts: number[]; // Maximale Geschwindigkeit der Windböen in km/h, 10m über Boden
-  uvIndex: number[]; // UV-Index nach WHO-Maßstab von 1 bis 11
-}
-
-export type HourlyWeatherWithTimes = HourlyWeather & { times: Date[] };
-
-export const hourlyUnits: {
-  key: keyof HourlyWeatherWithTimes;
-  unit: string;
-}[] = [
-  { key: 'times', unit: '' },
-  { key: 'temperature', unit: '°C' },
-  { key: 'apparentTemperature', unit: '°C' },
-  { key: 'humidity', unit: '%' },
-  { key: 'precipitationProbability', unit: '%' },
-  { key: 'precipitation', unit: 'mm' },
-  { key: 'weatherCode', unit: '' },
-  { key: 'pressure', unit: 'hPa' },
-  { key: 'cloudCoverLow', unit: '%' },
-  { key: 'cloudCoverMid', unit: '%' },
-  { key: 'cloudCoverHigh', unit: '%' },
-  { key: 'visibility', unit: 'm' },
-  { key: 'windSpeed', unit: 'km/h' },
-  { key: 'windDirection', unit: '°' },
-  { key: 'windGusts', unit: 'km/h' },
-  { key: 'uvIndex', unit: '' }
-];
-
-export const INITIAL_HOURLY_WEATHER: HourlyWeather = {
-  temperature: [],
-  apparentTemperature: [],
-  humidity: [],
-  precipitationProbability: [],
-  precipitation: [],
-  weatherCode: [],
-  pressure: [],
-  cloudCoverLow: [],
-  cloudCoverMid: [],
-  cloudCoverHigh: [],
-  visibility: [],
-  windSpeed: [],
-  windDirection: [],
-  windGusts: [],
-  uvIndex: []
-};
-
-export const hourlyWeatherMapping: {
-  key: keyof HourlyWeather;
-  index: number;
-}[] = [
-  { key: 'temperature', index: 0 },
-  { key: 'apparentTemperature', index: 1 },
-  { key: 'humidity', index: 2 },
-  { key: 'precipitationProbability', index: 3 },
-  { key: 'precipitation', index: 4 },
-  { key: 'weatherCode', index: 5 },
-  { key: 'pressure', index: 6 },
-  { key: 'cloudCoverLow', index: 7 },
-  { key: 'cloudCoverMid', index: 8 },
-  { key: 'cloudCoverHigh', index: 9 },
-  { key: 'visibility', index: 10 },
-  { key: 'windSpeed', index: 11 },
-  { key: 'windDirection', index: 12 },
-  { key: 'windGusts', index: 13 },
-  { key: 'uvIndex', index: 14 }
+export const HOURLY_WEATHERS: WeatherConfigs[] = [
+  { key: 'temperature', apiKey: 'temperature_2m', label: 'Temperatur', unit: '°C' }, // Temperatur in Celsius, 2m über Boden
+  {
+    key: 'apparentTemperature',
+    apiKey: 'apparent_temperature',
+    label: 'Gefühlte Temperatur',
+    unit: '°C'
+  }, // Gefühlte Temperatur in Celsius (Kombiniert Windkühlung, Sonneneinstrahlung und Luftfeuchtigkeit)
+  { key: 'humidity', apiKey: 'relative_humidity_2m', label: 'Luftfeuchtigkeit', unit: '%' }, // Luftfeuchtigkeit in %, 2m über Boden
+  {
+    key: 'precipitationProbability',
+    apiKey: 'precipitation_probability',
+    label: 'Niederschlagswahrscheinlichkeit',
+    unit: '%'
+  }, // Niederschlagswahrscheinlichkeit in %
+  { key: 'precipitation', apiKey: 'precipitation', label: 'Niederschlagssumme', unit: 'mm' }, // Niederschlagssumme in mm
+  { key: 'weatherCode', apiKey: 'weather_code', label: 'Wettercode' }, // Code für das Wetter, siehe WeatherCode
+  { key: 'pressure', apiKey: 'surface_pressure', label: 'Luftdruck', unit: 'hPa' }, // Luftdruck an der Oberfläche in hPa
+  {
+    key: 'cloudCoverLow',
+    apiKey: 'cloud_cover_low',
+    label: 'Wolkenbedeckung (Niedrig)',
+    unit: '%'
+  }, // Bedeckung durch Wolken und Nebel in bis zu 3km Höhe in %
+  { key: 'cloudCoverMid', apiKey: 'cloud_cover_mid', label: 'Wolkenbedeckung (Mittel)', unit: '%' }, // Bedeckung durch Wolken in 3km bis 8km Höhe in %
+  { key: 'cloudCoverHigh', apiKey: 'cloud_cover_high', label: 'Wolkenbedeckung (Hoch)', unit: '%' }, // Bedeckung durch Wolken ab 8km Höhe in %
+  { key: 'visibility', apiKey: 'visibility', label: 'Sichtweite', unit: 'm' }, // Sichtweite in m
+  { key: 'windSpeed', apiKey: 'wind_speed_10m', label: 'Windgeschwindigkeit', unit: 'km/h' }, // Windgeschwindigkeit in km/h, 10m über Boden
+  { key: 'windDirection', apiKey: 'wind_direction_10m', label: 'Windrichtung', unit: '°' }, // Windrichtung in Grad, 10m über Boden
+  { key: 'windGusts', apiKey: 'wind_gusts_10m', label: 'Windböen', unit: 'km/h' }, // Maximale Geschwindigkeit der Windböen in km/h, 10m über Boden
+  { key: 'uvIndex', apiKey: 'uv_index', label: 'Uv-Index' }, // UV-Index nach WHO-Maßstab von 1 bis 11,
+  { key: 'time', label: 'Datum & Zeit' } // Datum und Uhrzeit
 ];

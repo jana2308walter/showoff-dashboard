@@ -1,215 +1,141 @@
-export const DAILY_WEATHER_VALUES = [
-  'sunrise',
-  'sunset',
-  'weather_code',
-  'uv_index_max',
-  'temperature_2m_max',
-  'temperature_2m_min',
-  'temperature_2m_mean',
-  'apparent_temperature_max',
-  'apparent_temperature_min',
-  'apparent_temperature_mean',
-  'sunshine_duration',
-  'daylight_duration',
-  'cloud_cover_max',
-  'cloud_cover_min',
-  'cloud_cover_mean',
-  'precipitation_sum',
-  'precipitation_hours',
-  'precipitation_probability_max',
-  'precipitation_probability_min',
-  'precipitation_probability_mean',
-  'relative_humidity_2m_max',
-  'relative_humidity_2m_min',
-  'relative_humidity_2m_mean',
-  'surface_pressure_max',
-  'surface_pressure_min',
-  'surface_pressure_mean',
-  'visibility_max',
-  'visibility_min',
-  'visibility_mean',
-  'wind_direction_10m_dominant',
-  'wind_speed_10m_max',
-  'wind_speed_10m_min',
-  'wind_speed_10m_mean',
-  'wind_gusts_10m_max',
-  'wind_gusts_10m_min',
-  'wind_gusts_10m_mean'
-];
+import { WeatherConfigs } from './weather';
 
-export interface DailySun {
-  sunrise: Date[];
-  sunset: Date[];
-}
-
-export interface DailyWeather {
-  weatherCode: number[];
-  uvIndex: number[];
-  temperatureMax: number[];
-  temperatureMin: number[];
-  temperatureMean: number[];
-  apparentTemperatureMax: number[];
-  apparentTemperatureMin: number[];
-  apparentTemperatureMean: number[];
-  sunshineDuration: number[];
-  daylightDuration: number[];
-  cloudCoverMax: number[];
-  cloudCoverMin: number[];
-  cloudCoverMean: number[];
-  precipitationSum: number[];
-  precipitationHours: number[];
-  precipitationProbabilityMax: number[];
-  precipitationProbabilityMin: number[];
-  precipitationProbabilityMean: number[];
-  humidityMax: number[];
-  humidityMin: number[];
-  humidityMean: number[];
-  pressureMax: number[];
-  pressureMin: number[];
-  pressureMean: number[];
-  visibilityMax: number[];
-  visibilityMin: number[];
-  visibilityMean: number[];
-  windDirection: number[];
-  windSpeedMax: number[];
-  windSpeedMin: number[];
-  windSpeedMean: number[];
-  windGustsMax: number[];
-  windGustsMin: number[];
-  windGustsMean: number[];
-}
-
-export type DailyWeatherWithTimes = DailySun & DailyWeather & { times: Date[] };
-
-export const dailyUnits: {
-  key: keyof DailyWeatherWithTimes;
-  unit: string;
-}[] = [
-  { key: 'times', unit: '' },
-  { key: 'sunrise', unit: '' },
-  { key: 'sunset', unit: '' },
-  { key: 'weatherCode', unit: '' },
-  { key: 'uvIndex', unit: '' },
-  { key: 'temperatureMax', unit: '°C' },
-  { key: 'temperatureMin', unit: '°C' },
-  { key: 'temperatureMean', unit: '°C' },
-  { key: 'apparentTemperatureMax', unit: '°C' },
-  { key: 'apparentTemperatureMin', unit: '°C' },
-  { key: 'apparentTemperatureMean', unit: '°C' },
-  { key: 'sunshineDuration', unit: 's' },
-  { key: 'daylightDuration', unit: 's' },
-  { key: 'cloudCoverMax', unit: '%' },
-  { key: 'cloudCoverMin', unit: '%' },
-  { key: 'cloudCoverMean', unit: '%' },
-  { key: 'precipitationSum', unit: 'mm' },
-  { key: 'precipitationHours', unit: 'h' },
-  { key: 'precipitationProbabilityMax', unit: '%' },
-  { key: 'precipitationProbabilityMin', unit: '%' },
-  { key: 'precipitationProbabilityMean', unit: '%' },
-  { key: 'humidityMax', unit: '%' },
-  { key: 'humidityMin', unit: '%' },
-  { key: 'humidityMean', unit: '%' },
-  { key: 'pressureMax', unit: 'hPa' },
-  { key: 'pressureMin', unit: 'hPa' },
-  { key: 'pressureMean', unit: 'hPa' },
-  { key: 'visibilityMax', unit: 'm' },
-  { key: 'visibilityMin', unit: 'm' },
-  { key: 'visibilityMean', unit: 'm' },
-  { key: 'windDirection', unit: '°' },
-  { key: 'windSpeedMax', unit: 'km/h' },
-  { key: 'windSpeedMin', unit: 'km/h' },
-  { key: 'windSpeedMean', unit: 'km/h' },
-  { key: 'windGustsMax', unit: 'km/h' },
-  { key: 'windGustsMin', unit: 'km/h' },
-  { key: 'windGustsMean', unit: 'km/h' }
-];
-
-export const INITIAL_DAILY_SUN: DailySun = {
-  sunrise: [],
-  sunset: []
-};
-
-export const INITIAL_DAILY_WEATHER: DailyWeather = {
-  weatherCode: [],
-  uvIndex: [],
-  temperatureMax: [],
-  temperatureMin: [],
-  temperatureMean: [],
-  apparentTemperatureMax: [],
-  apparentTemperatureMin: [],
-  apparentTemperatureMean: [],
-  sunshineDuration: [],
-  daylightDuration: [],
-  cloudCoverMax: [],
-  cloudCoverMin: [],
-  cloudCoverMean: [],
-  precipitationSum: [],
-  precipitationHours: [],
-  precipitationProbabilityMax: [],
-  precipitationProbabilityMin: [],
-  precipitationProbabilityMean: [],
-  humidityMax: [],
-  humidityMin: [],
-  humidityMean: [],
-  pressureMax: [],
-  pressureMin: [],
-  pressureMean: [],
-  visibilityMax: [],
-  visibilityMin: [],
-  visibilityMean: [],
-  windDirection: [],
-  windSpeedMax: [],
-  windSpeedMin: [],
-  windSpeedMean: [],
-  windGustsMax: [],
-  windGustsMin: [],
-  windGustsMean: []
-};
-
-export const dailySunMapping: {
-  key: keyof DailySun;
-  index: number;
-}[] = [
-  { key: 'sunrise', index: 0 },
-  { key: 'sunset', index: 1 }
-];
-
-export const dailyWeatherMapping: {
-  key: keyof DailyWeather;
-  index: number;
-}[] = [
-  { key: 'weatherCode', index: 3 },
-  { key: 'uvIndex', index: 4 },
-  { key: 'temperatureMax', index: 5 },
-  { key: 'temperatureMin', index: 6 },
-  { key: 'temperatureMean', index: 7 },
-  { key: 'apparentTemperatureMax', index: 8 },
-  { key: 'apparentTemperatureMin', index: 9 },
-  { key: 'apparentTemperatureMean', index: 10 },
-  { key: 'sunshineDuration', index: 11 },
-  { key: 'daylightDuration', index: 12 },
-  { key: 'cloudCoverMax', index: 13 },
-  { key: 'cloudCoverMin', index: 14 },
-  { key: 'cloudCoverMean', index: 15 },
-  { key: 'precipitationSum', index: 16 },
-  { key: 'precipitationHours', index: 17 },
-  { key: 'precipitationProbabilityMax', index: 18 },
-  { key: 'precipitationProbabilityMin', index: 19 },
-  { key: 'precipitationProbabilityMean', index: 20 },
-  { key: 'humidityMax', index: 21 },
-  { key: 'humidityMin', index: 22 },
-  { key: 'humidityMean', index: 23 },
-  { key: 'pressureMax', index: 24 },
-  { key: 'pressureMin', index: 25 },
-  { key: 'pressureMean', index: 26 },
-  { key: 'visibilityMax', index: 27 },
-  { key: 'visibilityMin', index: 28 },
-  { key: 'visibilityMean', index: 29 },
-  { key: 'windDirection', index: 30 },
-  { key: 'windSpeedMax', index: 31 },
-  { key: 'windSpeedMin', index: 32 },
-  { key: 'windSpeedMean', index: 33 },
-  { key: 'windGustsMax', index: 34 },
-  { key: 'windGustsMin', index: 35 },
-  { key: 'windGustsMean', index: 36 }
+export const DAILY_WEATHERS: WeatherConfigs[] = [
+  { key: 'sunrise', apiKey: 'sunrise', label: 'Sonnenaufgang' },
+  { key: 'sunset', apiKey: 'sunset', label: 'Sonnenuntergang' },
+  { key: 'weatherCode', apiKey: 'weather_code', label: 'Wettercode' }, // Code für das Wetter, siehe WeatherCode
+  { key: 'uvIndex', apiKey: 'uv_index_max', label: 'Uv-Index' }, // UV-Index nach WHO-Maßstab von 1 bis 11,
+  { key: 'temperatureMax', apiKey: 'temperature_2m_max', label: 'Maximale Temperatur', unit: '°C' }, // Maximale Temperatur in Celsius, 2m über Boden
+  {
+    key: 'temperatureMean',
+    apiKey: 'temperature_2m_mean',
+    label: 'Durchschnittliche Temperatur',
+    unit: '°C'
+  }, // Durchschnittliche Temperatur in Celsius, 2m über Boden
+  { key: 'temperatureMin', apiKey: 'temperature_2m_min', label: 'Minimale Temperatur', unit: '°C' }, // Minimale Temperatur in Celsius, 2m über Boden
+  {
+    key: 'apparentTemperatureMax',
+    apiKey: 'apparent_temperature_max',
+    label: 'Maximal gefühlte Temperatur',
+    unit: '°C'
+  }, // Maximal gefühlte Temperatur in Celsius, 2m über Boden
+  {
+    key: 'apparentTemperatureMean',
+    apiKey: 'apparent_temperature_mean',
+    label: 'Durchschnittlich gefühlte Temperatur',
+    unit: '°C'
+  }, // Durchschnittlich gefühlte Temperatur in Celsius, 2m über Boden
+  {
+    key: 'apparentTemperatureMin',
+    apiKey: 'apparent_temperature_min',
+    label: 'Minimal gefühlte Temperatur',
+    unit: '°C'
+  }, // Minimal gefühlte Temperatur in Celsius, 2m über Boden
+  { key: 'sunshineDuration', apiKey: 'sunshine_duration', label: 'Sonnenschein', unit: 'h' }, // Sonnenschein in Stunden
+  { key: 'daylightDuration', apiKey: 'daylight_duration', label: 'Tageslicht', unit: 'h' }, // Tageslicht in Stunden
+  {
+    key: 'cloudCoverMax',
+    apiKey: 'cloud_cover_max',
+    label: 'Maximale Wolkenbedeckung',
+    unit: '%'
+  }, // Maximale Bedeckung durch Wolken und Nebel in %
+  {
+    key: 'cloudCoverMean',
+    apiKey: 'cloud_cover_mean',
+    label: 'Durchschnittliche Wolkenbedeckung',
+    unit: '%'
+  }, // Durchschnittliche Bedeckung durch Wolken in %
+  { key: 'cloudCoverMin', apiKey: 'cloud_cover_min', label: 'Minimale Wolkenbedeckung', unit: '%' }, // Minimale Bedeckung durch Wolken in %
+  { key: 'precipitationSum', apiKey: 'precipitation_sum', label: 'Niederschlagssumme', unit: 'mm' }, // Niederschlagssumme in mm
+  {
+    key: 'precipitationHours',
+    apiKey: 'precipitation_hours',
+    label: 'Niederschlagsstunden',
+    unit: 'h'
+  }, // Stunden mit Niederschlag in Stunden
+  {
+    key: 'precipitationProbabilityMax',
+    apiKey: 'precipitation_probability_max',
+    label: 'Maximale Niederschlagswahrscheinlichkeit',
+    unit: '%'
+  }, // Maximale Niederschlagswahrscheinlichkeit in %
+  {
+    key: 'precipitationProbabilityMean',
+    apiKey: 'precipitation_probability_mean',
+    label: 'Durchschnittliche Niederschlagswahrscheinlichkeit',
+    unit: '%'
+  }, // Durchschnittliche Niederschlagswahrscheinlichkeit in %
+  {
+    key: 'precipitationProbabilityMin',
+    apiKey: 'precipitation_probability_min',
+    label: 'Minimale Niederschlagswahrscheinlichkeit',
+    unit: '%'
+  }, // Minimale Niederschlagswahrscheinlichkeit in %
+  {
+    key: 'humidityMax',
+    apiKey: 'relative_humidity_2m_max',
+    label: 'Maximale Luftfeuchtigkeit',
+    unit: '%'
+  }, // Maximale Luftfeuchtigkeit in %, 2m über Boden
+  {
+    key: 'humidityMean',
+    apiKey: 'relative_humidity_2m_mean',
+    label: 'Durchschnittliche Luftfeuchtigkeit',
+    unit: '%'
+  }, // Durchschnittliche Luftfeuchtigkeit in %, 2m über Boden
+  {
+    key: 'humidityMin',
+    apiKey: 'relative_humidity_2m_min',
+    label: 'Minimale Luftfeuchtigkeit',
+    unit: '%'
+  }, // Minimale Luftfeuchtigkeit in %, 2m über Boden
+  { key: 'pressureMax', apiKey: 'surface_pressure_max', label: 'Maximaler Luftdruck', unit: 'hPa' }, // Maximaler Luftdruck an der Oberfläche in hPa
+  {
+    key: 'pressureMean',
+    apiKey: 'surface_pressure_mean',
+    label: 'Durchschnittlicher Luftdruck',
+    unit: 'hPa'
+  }, // Durchschnittlicher Luftdruck an der Oberfläche in hPa
+  { key: 'pressureMin', apiKey: 'surface_pressure_min', label: 'Minimaler Luftdruck', unit: 'hPa' }, // Minimaler Luftdruck an der Oberfläche in hPa
+  { key: 'visibilityMax', apiKey: 'visibility_max', label: 'Maximale Sichtweite', unit: 'm' }, // Maximale Sichtweite in m
+  {
+    key: 'visibilityMean',
+    apiKey: 'visibility_mean',
+    label: 'Durchschnittliche Sichtweite',
+    unit: 'm'
+  }, // Durchschnittliche Sichtweite in m
+  { key: 'visibilityMin', apiKey: 'visibility_min', label: 'Minimale Sichtweite', unit: 'm' }, // Minimale Sichtweite in m
+  {
+    key: 'windDirectionDominant',
+    apiKey: 'wind_direction_10m_dominant',
+    label: 'Dominante Windrichtung',
+    unit: '°'
+  }, // Dominante Windrichtung in Grad, 10m über Boden
+  {
+    key: 'windSpeedMax',
+    apiKey: 'wind_speed_10m_max',
+    label: 'Maximale Windgeschwindigkeit',
+    unit: 'km/h'
+  }, // Maximale Windgeschwindigkeit in km/h, 10m über Boden
+  {
+    key: 'windSpeedMean',
+    apiKey: 'wind_speed_10m_mean',
+    label: 'Durchschnittliche Windgeschwindigkeit',
+    unit: 'km/h'
+  }, // Durchschnittliche Windgeschwindigkeit in km/h, 10m über Boden
+  {
+    key: 'windSpeedMin',
+    apiKey: 'wind_speed_10m_min',
+    label: 'Minimale Windgeschwindigkeit',
+    unit: 'km/h'
+  }, // Minimale Windgeschwindigkeit in km/h, 10m über Boden
+  { key: 'windGustsMax', apiKey: 'wind_gusts_10m_max', label: 'Maximale Windböen', unit: 'km/h' }, // Maximale Geschwindigkeit der Windböen in km/h, 10m über Boden
+  {
+    key: 'windGustsMean',
+    apiKey: 'wind_gusts_10m_mean',
+    label: 'Durchschnittliche Windböen',
+    unit: 'km/h'
+  }, // Durchschnittliche Geschwindigkeit der Windböen in km/h, 10m über Boden
+  { key: 'windGustsMin', apiKey: 'wind_gusts_10m_min', label: 'Minimale Windböen', unit: 'km/h' }, // Minimale Geschwindigkeit der Windböen in km/h, 10m über Boden
+  { key: 'time', label: 'Datum & Zeit' } // Datum und Uhrzeit
 ];

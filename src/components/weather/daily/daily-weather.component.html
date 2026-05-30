@@ -1,4 +1,10 @@
-@if ($dailyWeather(); as daily) {
-  <h5>Tägliches Wetter</h5>
-  <p>{{ daily | json }}</p>
-}
+<h1>Tägliches Wetter</h1>
+<div>
+  @for (weather of $dailyWeather(); track weather.key) {
+    <h5>{{ weather.label }}</h5>
+
+    @for (daily of weather.values; track daily.id) {
+      <p>{{ daily.value }} {{ weather.unit }}</p>
+    }
+  }
+</div>

@@ -1,4 +1,10 @@
-@if ($hourlyWeather(); as hourly) {
-  <h5>Stündliches Wetter</h5>
-  <p>{{ hourly | json }}</p>
-}
+<h1>Stündliches Wetter</h1>
+<div>
+  @for (weather of $hourlyWeather(); track weather.key) {
+    <h5>{{ weather.label }}</h5>
+
+    @for (hourly of weather.values; track hourly.id) {
+      <p>{{ hourly.value }} {{ weather.unit }}</p>
+    }
+  }
+</div>

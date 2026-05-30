@@ -1,25 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { CURRENT_WEATHER_CONFIG, CURRENT_WEATHER_VALUES, CurrentWeather } from './current-weather';
-import {
-  HOURLY_WEATHER_VALUES,
-  HourlyWeather,
-  hourlyWeatherMapping,
-  HourlyWeatherWithTimes,
-  INITIAL_HOURLY_WEATHER
-} from './hourly-weather';
-import {
-  DAILY_WEATHER_VALUES,
-  DailySun,
-  dailySunMapping,
-  DailyWeather,
-  dailyWeatherMapping,
-  DailyWeatherWithTimes,
-  INITIAL_DAILY_SUN,
-  INITIAL_DAILY_WEATHER
-} from './daily-weather';
+import { HOURLY_WEATHERS } from './hourly-weather';
+import { DAILY_WEATHERS } from './daily-weather';
 import { fetchWeatherApi } from 'openmeteo';
 import { Injectable, resource, signal } from '@angular/core';
-import { Coordinates, Weather } from './weather';
+import { ArrayValues, Coordinates, Weather, WeatherConfig, WeatherConfigs } from './weather';
+import { CURRENT_WEATHER } from './current-weather';
+import { v4 as uuidV4 } from 'uuid';
 
 @Injectable({
   providedIn: 'root'
@@ -67,9 +53,9 @@ export class WeatherService {
     const params = {
       latitude: [latitude],
       longitude: [longitude],
-      current: CURRENT_WEATHER_VALUES,
-      hourly: HOURLY_WEATHER_VALUES,
-      daily: DAILY_WEATHER_VALUES
+      current: this.mapWeatherConfigToApiKeys(CURRENT_WEATHER),
+      hourly: this.mapWeatherConfigToApiKeys(HOURLY_WEATHERS),
+      daily: this.mapWeatherConfigToApiKeys(DAILY_WEATHERS)
     };
     const url = 'https://api.open-meteo.com/v1/forecast';
     const responses = await fetchWeatherApi(url, params);
@@ -92,25 +78,24 @@ export class WeatherService {
     };
   }
 
-  private getCurrentWeather(current: any, utcOffsetSeconds: number): CurrentWeather[] | null {
+  private getCurrentWeather(current: any, utcOffsetSeconds: number): WeatherConfig[] | null {
     if (!current) {
       return null;
     }
 
-    return CURRENT_WEATHER_CONFIG.map((item, index) => {
-      const isLast = index === CURRENT_WEATHER_CONFIG.length - 1;
-      const time = isLast ? new Date((Number(current.time()) + utcOffsetSeconds) * 1000) : NaN;
+    const time = new Date((Number(current.time()) + utcOffsetSeconds) * 1000).getTime();
+
+    return CURRENT_WEATHER.map((item, index) => {
+      const isTimeItem = item.key === 'time';
 
       return {
-        key: item.key,
-        label: item.label,
-        unit: item.unit,
-        value: isLast ? time : this.getValue(current, index)
-      } as CurrentWeather;
+        ...item,
+        value: isTimeItem ? time : this.getValue(current, index)
+      } as WeatherConfig;
     });
   }
 
-  private getHourlyWeather(hourly: any, utcOffsetSeconds: number): HourlyWeatherWithTimes | null {
+  private getHourlyWeather(hourly: any, utcOffsetSeconds: number): WeatherConfigs[] | null {
     if (!hourly) {
       return null;
     }
@@ -119,39 +104,46 @@ export class WeatherService {
       Number(hourly.time()),
       Number(hourly.timeEnd()),
       hourly.interval()
-    ).map((t) => new Date((t + utcOffsetSeconds) * 1000));
+    ).map((t) => new Date((t + utcOffsetSeconds) * 1000).getTime());
 
-    const result: HourlyWeather = INITIAL_HOURLY_WEATHER;
+    return HOURLY_WEATHERS.map((item, index) => {
+      const isTimeItem = item.key === 'time';
+      const numberValues = isTimeItem ? times : this.getValueArray(hourly, index);
+      const values: ArrayValues[] = numberValues.map((item) => ({ id: uuidV4(), value: item }));
 
-    for (const item of hourlyWeatherMapping) {
-      result[item.key] = this.getValueArray(hourly, item.index);
-    }
-
-    return { times, ...result };
+      return {
+        ...item,
+        values
+      } as WeatherConfigs;
+    });
   }
 
-  private getDailyWeather(daily: any, utcOffsetSeconds: number): DailyWeatherWithTimes | null {
+  private getDailyWeather(daily: any, utcOffsetSeconds: number): WeatherConfigs[] | null {
     if (!daily) {
       return null;
     }
 
     const times = this.range(Number(daily.time()), Number(daily.timeEnd()), daily.interval()).map(
-      (t) => new Date((t + utcOffsetSeconds) * 1000)
+      (t) => new Date((t + utcOffsetSeconds) * 1000).getTime()
     );
 
-    const weatherResult: DailyWeather = INITIAL_DAILY_WEATHER;
+    return DAILY_WEATHERS.map((item, index) => {
+      const isTimeItem = item.key === 'time';
+      const isDateItem = item.key === 'sunrise' || item.key === 'sunset';
+      const numberValues = isTimeItem
+        ? times
+        : isDateItem
+          ? this.getDateArray(daily, index, utcOffsetSeconds)
+          : this.getValueArray(daily, index);
+      const values: ArrayValues[] = numberValues.map((item) => ({ id: uuidV4(), value: item }));
 
-    for (const item of dailyWeatherMapping) {
-      weatherResult[item.key] = this.getValueArray(daily, item.index);
-    }
+      values.forEach((value) => console.log('Value', value));
 
-    const sunResult: DailySun = INITIAL_DAILY_SUN;
-
-    for (const item of dailySunMapping) {
-      sunResult[item.key] = this.getDateArray(daily, item.index, utcOffsetSeconds);
-    }
-
-    return { times, ...weatherResult, ...sunResult };
+      return {
+        ...item,
+        values
+      } as WeatherConfigs;
+    });
   }
 
   private getValue(object: any, index: number): number {
@@ -162,11 +154,15 @@ export class WeatherService {
     return object.variables(index)?.valuesArray();
   }
 
-  private getDateArray(object: any, index: number, utcOffsetSeconds: number): Date[] {
+  private getDateArray(object: any, index: number, utcOffsetSeconds: number): number[] {
     const value = object.variables(index);
 
-    return [...Array(value.valuesInt64Length())].map(
-      (_, i) => new Date((Number(value.valuesInt64(i)) + utcOffsetSeconds) * 1000)
+    return [...Array(value.valuesInt64Length())].map((_, i) =>
+      new Date((Number(value.valuesInt64(i)) + utcOffsetSeconds) * 1000).getTime()
     );
+  }
+
+  private mapWeatherConfigToApiKeys(weatherConfigs: WeatherConfig[]): string[] {
+    return weatherConfigs.map((weather) => weather.apiKey || '').filter(Boolean);
   }
 }
