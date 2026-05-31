@@ -1,0 +1,47 @@
+@use './sizes';
+
+$standard-font-size: sizes.$spacing6;
+
+@mixin headlines {
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+@mixin headline-1 {
+  @include headlines;
+
+  font-size: sizes.$spacing9;
+}
+
+@mixin headline-2 {
+  @include headlines;
+
+  font-size: sizes.$spacing8;
+}
+
+@mixin headline-3 {
+  @include headlines;
+
+  font-size: sizes.$spacing7;
+}
+
+@mixin headline-4 {
+  @include headlines;
+
+  font-size: $standard-font-size;
+}
+
+@mixin bold-text {
+  font-size: $standard-font-size;
+  font-weight: 500;
+}
+
+@mixin text {
+  font-size: $standard-font-size;
+  font-weight: 400;
+}
+
+@mixin small-text {
+  font-size: $standard-font-size;
+  font-weight: 300;
+}

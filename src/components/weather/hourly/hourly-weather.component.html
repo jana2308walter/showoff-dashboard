@@ -1,0 +1,11 @@
+<h1>Stündliches Wetter</h1>
+
+<div>
+  @for (hourlyWeather of $hourlyWeathers(); track hourlyWeather.key) {
+    <h5>{{ hourlyWeather.label }}</h5>
+
+    @for (parsedValue of hourlyWeather.value; track parsedValue.id) {
+      <p>{{ parsedValue.value }} {{ hourlyWeather.unit }}</p>
+    }
+  }
+</div>

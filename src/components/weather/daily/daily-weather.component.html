@@ -1,0 +1,11 @@
+<h1>Tägliches Wetter</h1>
+
+<div>
+  @for (dailyWeather of $dailyWeathers(); track dailyWeather.key) {
+    <h5>{{ dailyWeather.label }}</h5>
+
+    @for (parsedValue of dailyWeather.value; track parsedValue.id) {
+      <p>{{ parsedValue.value }} {{ dailyWeather.unit }}</p>
+    }
+  }
+</div>

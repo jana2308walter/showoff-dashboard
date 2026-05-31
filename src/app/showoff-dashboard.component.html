@@ -1,1 +1,18 @@
-<h1>Dies ist das Showoff-Dashboard</h1>
+<div class="page">
+  <aside class="nav">
+    @for (item of navItems; track item.id) {
+      <a
+        [routerLink]="item.link"
+        class="nav__item"
+        [class.is-active]="$actualRoute() === item.link"
+      >
+        <span class="material-symbols-outlined icon">{{ item.iconName }}</span>
+        <span class="label">{{ item.label }}</span>
+      </a>
+    }
+  </aside>
+
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

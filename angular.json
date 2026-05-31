@@ -3,13 +3,12 @@
   "version": 1,
   "cli": {
     "packageManager": "npm",
-    "schematicCollections": [
-      "angular-eslint"
-    ]
+    "schematicCollections": ["angular-eslint"],
+    "analytics": false
   },
   "newProjectRoot": "projects",
   "projects": {
-    "equi-track-dashboard": {
+    "showoff-dashboard": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -18,7 +17,7 @@
       },
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "sod",
       "architect": {
         "build": {
           "builder": "@angular/build:application",
@@ -32,7 +31,7 @@
                 "input": "public"
               }
             ],
-            "styles": []
+            "styles": ["node_modules/material-symbols/index.css", "./src/styles.scss"]
           },
           "configurations": {
             "production": {
@@ -76,10 +75,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
-            ]
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
         }
       }

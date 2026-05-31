@@ -1,0 +1,8 @@
+<h1>Aktuelles Wetter</h1>
+<div>
+  @for (weather of $currentWeather(); track weather.key) {
+    <h5>{{ weather.label }}:</h5>
+
+    <p>{{ weather.value }} {{ weather.unit }}</p>
+  }
+</div>
