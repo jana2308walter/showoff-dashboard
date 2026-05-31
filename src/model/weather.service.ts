@@ -151,7 +151,7 @@ export class WeatherService {
 
       return {
         ...item,
-        parsedValue
+        value: parsedValue
       } as CurrentWeatherConfig;
     });
   }
@@ -184,7 +184,7 @@ export class WeatherService {
 
       return {
         ...item,
-        parsedValues
+        value: parsedValues
       } as ForecastWeatherConfig;
     });
   }
