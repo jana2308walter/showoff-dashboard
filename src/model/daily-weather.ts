@@ -97,14 +97,14 @@ export const DAILY_WEATHERS: WeatherConfigs[] = [
     unit: 'hPa'
   }, // Durchschnittlicher Luftdruck an der Oberfläche in hPa
   { key: 'pressureMin', apiKey: 'surface_pressure_min', label: 'Minimaler Luftdruck', unit: 'hPa' }, // Minimaler Luftdruck an der Oberfläche in hPa
-  { key: 'visibilityMax', apiKey: 'visibility_max', label: 'Maximale Sichtweite', unit: 'm' }, // Maximale Sichtweite in m
+  { key: 'visibilityMax', apiKey: 'visibility_max', label: 'Maximale Sichtweite', unit: 'km' }, // Maximale Sichtweite in km
   {
     key: 'visibilityMean',
     apiKey: 'visibility_mean',
     label: 'Durchschnittliche Sichtweite',
-    unit: 'm'
-  }, // Durchschnittliche Sichtweite in m
-  { key: 'visibilityMin', apiKey: 'visibility_min', label: 'Minimale Sichtweite', unit: 'm' }, // Minimale Sichtweite in m
+    unit: 'km'
+  }, // Durchschnittliche Sichtweite in km
+  { key: 'visibilityMin', apiKey: 'visibility_min', label: 'Minimale Sichtweite', unit: 'km' }, // Minimale Sichtweite in km
   {
     key: 'windDirectionDominant',
     apiKey: 'wind_direction_10m_dominant',

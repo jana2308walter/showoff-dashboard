@@ -26,7 +26,7 @@ export const CURRENT_WEATHER: WeatherConfig[] = [
   }, // Bedeckung durch Wolken und Nebel in bis zu 3km Höhe in %
   { key: 'cloudCoverMid', apiKey: 'cloud_cover_mid', label: 'Wolkenbedeckung (Mittel)', unit: '%' }, // Bedeckung durch Wolken in 3km bis 8km Höhe in %
   { key: 'cloudCoverHigh', apiKey: 'cloud_cover_high', label: 'Wolkenbedeckung (Hoch)', unit: '%' }, // Bedeckung durch Wolken ab 8km Höhe in %
-  { key: 'visibility', apiKey: 'visibility', label: 'Sichtweite', unit: 'm' }, // Sichtweite in m
+  { key: 'visibility', apiKey: 'visibility', label: 'Sichtweite', unit: 'km' }, // Sichtweite in km
   { key: 'windSpeed', apiKey: 'wind_speed_10m', label: 'Windgeschwindigkeit', unit: 'km/h' }, // Windgeschwindigkeit in km/h, 10m über Boden
   { key: 'windDirection', apiKey: 'wind_direction_10m', label: 'Windrichtung', unit: '°' }, // Windrichtung in Grad, 10m über Boden
   { key: 'windGusts', apiKey: 'wind_gusts_10m', label: 'Windböen', unit: 'km/h' }, // Maximale Geschwindigkeit der Windböen in km/h, 10m über Boden

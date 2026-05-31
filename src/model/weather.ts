@@ -9,7 +9,7 @@ export interface WeatherConfig {
   apiKey?: string;
   label: string;
   unit?: string;
-  value?: number;
+  parsedValue?: string | number;
 }
 
 export interface WeatherConfigs {
@@ -17,7 +17,7 @@ export interface WeatherConfigs {
   apiKey?: string;
   label: string;
   unit?: string;
-  values?: number[];
+  parsedValues?: { id: string; value: string | number }[];
 }
 
 export interface Coordinates {

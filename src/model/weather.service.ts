@@ -3,8 +3,9 @@ import { HOURLY_WEATHERS } from './hourly-weather';
 import { DAILY_WEATHERS } from './daily-weather';
 import { fetchWeatherApi } from 'openmeteo';
 import { Injectable, resource, signal } from '@angular/core';
-import { Coordinates, Weather, WeatherConfig, WeatherConfigs } from './weather';
+import { Coordinates, Weather, WEATHER_CODES, WeatherConfig, WeatherConfigs } from './weather';
 import { CURRENT_WEATHER } from './current-weather';
+import { v4 as uuidV4 } from 'uuid';
 
 @Injectable({
   providedIn: 'root'
@@ -86,10 +87,12 @@ export class WeatherService {
 
     return CURRENT_WEATHER.map((item, index) => {
       const isTimeItem = item.key === 'time';
+      const value = isTimeItem ? time : this.getValue(current, index);
+      const parsedValue = this.parseRawData(value, !!item.unit, item.key);
 
       return {
         ...item,
-        value: isTimeItem ? time : this.getValue(current, index)
+        parsedValue
       } as WeatherConfig;
     });
   }
@@ -108,10 +111,11 @@ export class WeatherService {
     return HOURLY_WEATHERS.map((item, index) => {
       const isTimeItem = item.key === 'time';
       const values = isTimeItem ? times : this.getValueArray(hourly, index);
+      const parsedValues = this.parseArrayData(values, !!item.unit, item.key);
 
       return {
         ...item,
-        values
+        parsedValues
       } as WeatherConfigs;
     });
   }
@@ -133,10 +137,11 @@ export class WeatherService {
         : isDateItem
           ? this.getDateArray(daily, index, utcOffsetSeconds)
           : this.getValueArray(daily, index);
+      const parsedValues = this.parseArrayData(values, !!item.unit, item.key);
 
       return {
         ...item,
-        values
+        parsedValues
       } as WeatherConfigs;
     });
   }
@@ -145,7 +150,7 @@ export class WeatherService {
     return object.variables(index)?.value();
   }
 
-  private getValueArray(object: any, index: number): number[] {
+  private getValueArray(object: any, index: number): Float32Array {
     return object.variables(index)?.valuesArray();
   }
 
@@ -159,5 +164,58 @@ export class WeatherService {
 
   private mapWeatherConfigToApiKeys(weatherConfigs: WeatherConfig[] | WeatherConfigs[]): string[] {
     return weatherConfigs.map((weather) => weather.apiKey || '').filter(Boolean);
+  }
+
+  private parseRawData(value: number, hasUnit: boolean, key: string): number | string {
+    let parsedValue: number | string | undefined = value;
+
+    if (key === 'time' || key === 'sunrise' || key === 'sunset') {
+      parsedValue = this.formatDate(parsedValue);
+    } else if (hasUnit || key === 'uvIndex') {
+      parsedValue = Math.round(parsedValue || 0);
+    }
+
+    if (key === 'sunshineDuration' || key === 'daylightDuration') {
+      const numberValue = typeof parsedValue === 'number' ? parsedValue : NaN;
+      parsedValue = Math.round(numberValue / 3600);
+    }
+
+    if (key.includes('visibility')) {
+      const numberValue = typeof parsedValue === 'number' ? parsedValue : NaN;
+      parsedValue = Math.round(numberValue / 1000);
+    }
+
+    if (key === 'weatherCode') {
+      const numberValue = typeof parsedValue === 'number' ? parsedValue : NaN;
+      parsedValue = WEATHER_CODES[numberValue].de;
+    }
+
+    return parsedValue;
+  }
+
+  private parseArrayData(
+    values: Float32Array | number[],
+    hasUnit: boolean,
+    key: string
+  ): { id: string; value: string | number }[] {
+    return Array.from(values).map((value) => ({
+      id: uuidV4(),
+      value: this.parseRawData(value, hasUnit, key)
+    }));
+  }
+
+  private formatDate(unixTime?: number): string {
+    if (!unixTime) {
+      return '';
+    }
+
+    const date = new Date(unixTime);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+
+    return `${day}.${month}.${year} um ${hours}:${minutes} Uhr`;
   }
 }
