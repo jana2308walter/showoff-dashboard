@@ -1,6 +1,7 @@
 import { Component, computed, inject } from '@angular/core';
 import { WeatherService } from '../../../model/weather.service';
 import { WeatherConfigs } from '../../../model/weather';
+import { v4 as uuidV4 } from 'uuid';
 
 @Component({
   selector: 'sod-hourly-weather',
@@ -13,4 +14,6 @@ export class HourlyWeatherComponent {
     const weather = this.weatherService.$weather.value;
     return weather()?.hourly ?? [];
   });
+
+  protected readonly uuidV4 = uuidV4;
 }
