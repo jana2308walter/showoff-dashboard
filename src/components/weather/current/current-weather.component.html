@@ -3,6 +3,6 @@
   @for (weather of $currentWeather(); track weather.key) {
     <h5>{{ weather.label }}:</h5>
 
-    <p>{{ weather.parsedValue }} {{ weather.unit }}</p>
+    <p>{{ weather.value }} {{ weather.unit }}</p>
   }
 </div>

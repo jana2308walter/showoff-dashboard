@@ -4,7 +4,7 @@
   @for (hourlyWeather of $hourlyWeathers(); track hourlyWeather.key) {
     <h5>{{ hourlyWeather.label }}</h5>
 
-    @for (parsedValue of hourlyWeather.parsedValues; track parsedValue.id) {
+    @for (parsedValue of hourlyWeather.value; track parsedValue.id) {
       <p>{{ parsedValue.value }} {{ hourlyWeather.unit }}</p>
     }
   }
