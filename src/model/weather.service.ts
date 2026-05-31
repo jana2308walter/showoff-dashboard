@@ -7,25 +7,20 @@ import {
   Coordinates,
   CurrentWeatherConfig,
   ForecastWeatherConfig,
-  parsers,
-  Weather
+  Weather,
+  WeatherKey
 } from './weather';
 import { CURRENT_WEATHER } from './current-weather';
+import { weatherParsers } from './weather-parsers';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WeatherService {
-  private readonly dateFormatter = new Intl.DateTimeFormat('de-DE', {
-    dateStyle: 'medium',
-    timeStyle: 'short'
-  });
-
   private readonly $coordinatesState = signal<Coordinates>({
     latitude: NaN,
     longitude: NaN
   });
-
   readonly $coordinates = this.$coordinatesState.asReadonly();
 
   set coordinates(coordinates: Coordinates) {
@@ -44,23 +39,6 @@ export class WeatherService {
       return await this.getWeatherData(params.latitude, params.longitude);
     }
   }).asReadonly();
-
-  private buildTimestamps(start: number, end: number, interval: number, offset: number): number[] {
-    return Array.from({ length: (end - start) / interval }, (_, i) =>
-      new Date((start + i * interval + offset) * 1000).getTime()
-    );
-  }
-
-  private coordinatesValid(latitude: number, longitude: number): boolean {
-    if (isNaN(latitude) || isNaN(longitude)) {
-      return false;
-    }
-
-    const latitudeInRange = latitude >= -90 && latitude <= 90;
-    const longitudeInRange = longitude >= -180 && longitude <= 180;
-
-    return latitudeInRange && longitudeInRange;
-  }
 
   private async getWeatherData(latitude: number, longitude: number): Promise<Weather> {
     const params = {
@@ -89,6 +67,70 @@ export class WeatherService {
       hourly,
       daily
     };
+  }
+
+  private buildTimestamps(start: number, end: number, interval: number, offset: number): number[] {
+    return Array.from({ length: (end - start) / interval }, (_, i) =>
+      new Date((start + i * interval + offset) * 1000).getTime()
+    );
+  }
+
+  private coordinatesValid(latitude: number, longitude: number): boolean {
+    if (isNaN(latitude) || isNaN(longitude)) {
+      return false;
+    }
+
+    const latitudeInRange = latitude >= -90 && latitude <= 90;
+    const longitudeInRange = longitude >= -180 && longitude <= 180;
+
+    return latitudeInRange && longitudeInRange;
+  }
+
+  private getDateArray(object: any, index: number, utcOffsetSeconds: number): number[] {
+    const value = object.variables(index);
+
+    return [...Array(value.valuesInt64Length())].map((_, i) =>
+      new Date((Number(value.valuesInt64(i)) + utcOffsetSeconds) * 1000).getTime()
+    );
+  }
+
+  private getValue(object: any, index: number): number {
+    return object.variables(index)?.value();
+  }
+
+  private getValueArray(object: any, index: number): Float32Array {
+    return object.variables(index)?.valuesArray();
+  }
+
+  private mapWeatherConfigToApiKeys(
+    weatherConfigs: CurrentWeatherConfig[] | ForecastWeatherConfig[]
+  ): string[] {
+    return weatherConfigs.map((weather) => weather.apiKey || '').filter(Boolean);
+  }
+
+  private parseArrayData(
+    values: Float32Array | number[],
+    hasUnit: boolean,
+    key: WeatherKey
+  ): { id: string; value: string | number }[] {
+    return Array.from(values).map((value, index) => ({
+      id: `${key}-${index}`,
+      value: this.parseRawData(value, hasUnit, key)
+    }));
+  }
+
+  private parseRawData(value: number, hasUnit: boolean, key: WeatherKey): number | string {
+    const parser = weatherParsers[key];
+
+    if (parser) {
+      return parser(value);
+    }
+
+    if (hasUnit) {
+      return Math.round(value ?? 0);
+    }
+
+    return value;
   }
 
   private transformCurrent(
@@ -145,69 +187,5 @@ export class WeatherService {
         parsedValues
       } as ForecastWeatherConfig;
     });
-  }
-
-  private getValue(object: any, index: number): number {
-    return object.variables(index)?.value();
-  }
-
-  private getValueArray(object: any, index: number): Float32Array {
-    return object.variables(index)?.valuesArray();
-  }
-
-  private getDateArray(object: any, index: number, utcOffsetSeconds: number): number[] {
-    const value = object.variables(index);
-
-    return [...Array(value.valuesInt64Length())].map((_, i) =>
-      new Date((Number(value.valuesInt64(i)) + utcOffsetSeconds) * 1000).getTime()
-    );
-  }
-
-  private mapWeatherConfigToApiKeys(
-    weatherConfigs: CurrentWeatherConfig[] | ForecastWeatherConfig[]
-  ): string[] {
-    return weatherConfigs.map((weather) => weather.apiKey || '').filter(Boolean);
-  }
-
-  private parseRawData(value: number, hasUnit: boolean, key: string): number | string {
-    let parsedValue: number | string | undefined = value;
-
-    const parser = parsers[key];
-
-    if (parser) {
-      return parser(value);
-    }
-
-    if (key === 'time' || key === 'sunrise' || key === 'sunset') {
-      parsedValue = this.formatDate(parsedValue);
-    } else if (hasUnit || key === 'uvIndex') {
-      parsedValue = Math.round(parsedValue || 0);
-    }
-
-    if (key.includes('visibility')) {
-      const numberValue = typeof parsedValue === 'number' ? parsedValue : NaN;
-      parsedValue = Math.round(numberValue / 1000);
-    }
-
-    return parsedValue;
-  }
-
-  private parseArrayData(
-    values: Float32Array | number[],
-    hasUnit: boolean,
-    key: string
-  ): { id: string; value: string | number }[] {
-    return Array.from(values).map((value, index) => ({
-      id: `${key}-${index}`,
-      value: this.parseRawData(value, hasUnit, key)
-    }));
-  }
-
-  private formatDate(unixTime?: number): string {
-    if (!unixTime) {
-      return '';
-    }
-
-    return this.dateFormatter.format(unixTime) + ' Uhr';
   }
 }
