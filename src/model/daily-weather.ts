@@ -1,6 +1,6 @@
-import { WeatherConfigs } from './weather';
+import { ForecastWeatherConfig } from './weather';
 
-export const DAILY_WEATHERS: WeatherConfigs[] = [
+export const DAILY_WEATHERS: ForecastWeatherConfig[] = [
   { key: 'sunrise', apiKey: 'sunrise', label: 'Sonnenaufgang' },
   { key: 'sunset', apiKey: 'sunset', label: 'Sonnenuntergang' },
   { key: 'weatherCode', apiKey: 'weather_code', label: 'Wettercode' }, // Code für das Wetter, siehe WeatherCode

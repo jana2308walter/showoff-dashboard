@@ -1,6 +1,6 @@
-import { WeatherConfig } from './weather';
+import { CurrentWeatherConfig } from './weather';
 
-export const CURRENT_WEATHER: WeatherConfig[] = [
+export const CURRENT_WEATHER: CurrentWeatherConfig[] = [
   { key: 'temperature', apiKey: 'temperature_2m', label: 'Temperatur', unit: '°C' }, // Temperatur in Celsius, 2m über Boden
   {
     key: 'apparentTemperature',

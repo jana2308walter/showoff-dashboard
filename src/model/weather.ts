@@ -1,23 +1,19 @@
 export interface Weather {
-  current: WeatherConfig[];
-  hourly: WeatherConfigs[];
-  daily: WeatherConfigs[];
+  current: CurrentWeatherConfig[];
+  hourly: ForecastWeatherConfig[];
+  daily: ForecastWeatherConfig[];
 }
 
-export interface WeatherConfig {
+export type CurrentWeatherConfig = WeatherConfig<string | number>;
+
+export type ForecastWeatherConfig = WeatherConfig<{ id: string; value: string | number }[]>;
+
+interface WeatherConfig<T> {
   key: string;
   apiKey?: string;
   label: string;
   unit?: string;
-  parsedValue?: string | number;
-}
-
-export interface WeatherConfigs {
-  key: string;
-  apiKey?: string;
-  label: string;
-  unit?: string;
-  parsedValues?: { id: string; value: string | number }[];
+  value?: T;
 }
 
 export interface Coordinates {
@@ -59,4 +55,10 @@ export const WEATHER_CODES: Record<number, WeatherCodeText> = {
   95: { de: 'Gewitter', en: 'Thunderstorm' },
   96: { de: 'Gewitter mit leichtem Hagel', en: 'Thunderstorm with slight hail' },
   99: { de: 'Gewitter mit starkem Hagel', en: 'Thunderstorm with heavy hail' }
+};
+
+export const parsers: Record<string, (value: number | string) => string | number> = {
+  weatherCode: (value) => WEATHER_CODES[Number(value)]?.de ?? 'Unbekannt',
+  sunshineDuration: (value) => Math.round(Number(value) / 3600),
+  daylightDuration: (value) => Math.round(Number(value) / 3600)
 };
