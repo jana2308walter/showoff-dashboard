@@ -1,0 +1,35 @@
+@use '../base/sizes';
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: calc((100% - (3 * #{sizes.$spacing7})) / 4);
+  padding: sizes.$spacing5;
+  border-radius: sizes.$spacing4;
+
+  &.is-orange {
+    background-color: orange;
+  }
+
+  &.is-yellow {
+    background-color: yellow;
+  }
+
+  &.is-green {
+    background-color: lawngreen;
+  }
+
+  &.is-lightblue {
+    background-color: cyan;
+  }
+
+  &.is-darkblue {
+    background-color: darkcyan;
+  }
+
+  &.is-violet {
+    background-color: darkmagenta;
+  }
+}

@@ -21,6 +21,17 @@ export interface WeatherConfig<T> {
   value?: T;
 }
 
+export type StringCurrentWeatherConfig = StringWeatherConfig<string>;
+
+export type StringForecastWeatherConfig = StringWeatherConfig<{ id: string; value: string }[]>;
+
+export interface StringWeatherConfig<T> {
+  key: WeatherKey;
+  label: string;
+  unit: string;
+  value: T;
+}
+
 export type WeatherKey =
   | 'apparentTemperature'
   | 'apparentTemperatureMax'

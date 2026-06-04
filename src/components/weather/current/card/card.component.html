@@ -1,0 +1,7 @@
+<p class="title">{{ $title() }}</p>
+
+@for (value of $mappedValues(); track value) {
+  <p class="value">{{ value }}</p>
+}
+
+<p class="subtitle">{{ $mappedSubtitles() }}</p>

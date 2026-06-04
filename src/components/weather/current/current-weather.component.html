@@ -1,8 +1,71 @@
-<h1>Aktuelles Wetter</h1>
-<div>
-  @for (weather of $currentWeather(); track weather.key) {
-    <h5>{{ weather.label }}:</h5>
+<h1>Aktuelles Wetter ({{ $time().value }})</h1>
 
-    <p>{{ weather.value }} {{ weather.unit }}</p>
-  }
+<div class="card-group">
+  <sod-card
+    [color]="'yellow'"
+    [title]="$apparentTemperature().label"
+    [values]="[$apparentTemperature().value, $apparentTemperature().unit]"
+    [subtitles]="[$temperature().value, $temperature().unit]"
+  ></sod-card>
+
+  <sod-card
+    [color]="'orange'"
+    [title]="$weatherCode().label"
+    [values]="[$weatherCode().value]"
+  ></sod-card>
+
+  <sod-card
+    [color]="'lightblue'"
+    [title]="$precipitationProbability().label"
+    [values]="[$precipitationProbability().value, $precipitationProbability().unit]"
+    [subtitles]="[$precipitation().label, $precipitation().value, $precipitation().unit]"
+  ></sod-card>
+
+  <sod-card
+    [color]="'darkblue'"
+    [title]="$windSpeed().label"
+    [values]="[$windSpeed().value, $windSpeed().unit]"
+    [subtitles]="[
+      $windGusts().label,
+      $windGusts().value,
+      $windGusts().unit,
+      $windDirection().value,
+      $windDirection().unit
+    ]"
+  ></sod-card>
+
+  <sod-card
+    [color]="'lightblue'"
+    [title]="$humidity().label"
+    [values]="[$humidity().value, $humidity().unit]"
+  ></sod-card>
+
+  <sod-card
+    [color]="'violet'"
+    [title]="$pressure().label"
+    [values]="[$pressure().value, $pressure().unit]"
+  ></sod-card>
+
+  <sod-card
+    [color]="'green'"
+    [title]="getCloudCoverLabel($cloudCoverLow(), true)"
+    [values]="[
+      getCloudCoverLabel($cloudCoverLow()),
+      $cloudCoverLow().value,
+      $cloudCoverLow().unit,
+      getCloudCoverLabel($cloudCoverMid()),
+      $cloudCoverMid().value,
+      $cloudCoverMid().unit,
+      getCloudCoverLabel($cloudCoverHigh()),
+      $cloudCoverHigh().value,
+      $cloudCoverHigh().unit
+    ]"
+  ></sod-card>
+
+  <sod-card
+    [color]="'violet'"
+    [title]="$uvIndex().label"
+    [values]="[$uvIndex().value]"
+    [subtitles]="[$visibility().label, $visibility().value, $visibility().unit]"
+  ></sod-card>
 </div>
