@@ -1,27 +1,27 @@
 <sod-site-title [title]="'Aktuelles Wetter'" [subtitle]="$time().value"></sod-site-title>
 
-<div class="card-group">
-  <sod-card
+<div class="current-card-group">
+  <sod-current-card
     [color]="'yellow'"
     [title]="$apparentTemperature().label"
     [values]="[$apparentTemperature().value, $apparentTemperature().unit]"
     [subtitles]="[$temperature().value, $temperature().unit]"
-  ></sod-card>
+  ></sod-current-card>
 
-  <sod-card
+  <sod-current-card
     [color]="'orange'"
     [title]="$weatherCode().label"
     [values]="[$weatherCode().value]"
-  ></sod-card>
+  ></sod-current-card>
 
-  <sod-card
+  <sod-current-card
     [color]="'lightblue'"
     [title]="$precipitationProbability().label"
     [values]="[$precipitationProbability().value, $precipitationProbability().unit]"
     [subtitles]="[$precipitation().label, $precipitation().value, $precipitation().unit]"
-  ></sod-card>
+  ></sod-current-card>
 
-  <sod-card
+  <sod-current-card
     [color]="'darkblue'"
     [title]="$windSpeed().label"
     [values]="[$windSpeed().value, $windSpeed().unit]"
@@ -32,21 +32,21 @@
       $windDirection().value,
       $windDirection().unit
     ]"
-  ></sod-card>
+  ></sod-current-card>
 
-  <sod-card
+  <sod-current-card
     [color]="'lightblue'"
     [title]="$humidity().label"
     [values]="[$humidity().value, $humidity().unit]"
-  ></sod-card>
+  ></sod-current-card>
 
-  <sod-card
+  <sod-current-card
     [color]="'violet'"
     [title]="$pressure().label"
     [values]="[$pressure().value, $pressure().unit]"
-  ></sod-card>
+  ></sod-current-card>
 
-  <sod-card
+  <sod-current-card
     [color]="'green'"
     [hasSmallValueText]="true"
     [title]="getCloudCoverLabel($cloudCoverLow(), true)"
@@ -61,12 +61,12 @@
       $cloudCoverHigh().value,
       $cloudCoverHigh().unit
     ]"
-  ></sod-card>
+  ></sod-current-card>
 
-  <sod-card
+  <sod-current-card
     [color]="'violet'"
     [title]="$uvIndex().label"
     [values]="[$uvIndex().value]"
     [subtitles]="[$visibility().label, $visibility().value, $visibility().unit]"
-  ></sod-card>
+  ></sod-current-card>
 </div>

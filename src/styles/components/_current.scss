@@ -1,6 +1,6 @@
 @use '../base/sizes';
 
-.card-group {
+.current-card-group {
   display: flex;
   flex-wrap: wrap;
   gap: sizes.$spacing7;

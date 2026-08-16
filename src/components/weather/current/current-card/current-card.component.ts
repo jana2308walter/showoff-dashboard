@@ -1,16 +1,16 @@
 import { Component, computed, HostBinding, input } from '@angular/core';
-import { CardColor } from './card-color';
+import { CurrentCardColor } from './current-card-color';
 
 @Component({
-  selector: 'sod-card',
-  templateUrl: './card.component.html'
+  selector: 'sod-current-card',
+  templateUrl: './current-card.component.html'
 })
-export class CardComponent {
+export class CurrentCardComponent {
   readonly $title = input('', { alias: 'title' });
   readonly $values = input<string[]>([], { alias: 'values' });
   readonly $subtitles = input<string[]>([], { alias: 'subtitles' });
 
-  readonly $color = input<CardColor>('transparent', { alias: 'color' });
+  readonly $color = input<CurrentCardColor>('transparent', { alias: 'color' });
   readonly $hasSmallValueText = input(false, { alias: 'hasSmallValueText' });
 
   protected readonly $mappedValues = computed(() => {
@@ -67,6 +67,6 @@ export class CardComponent {
 
   @HostBinding('class')
   protected get classes(): string {
-    return `card is-${this.$color()}`;
+    return `current-card is-${this.$color()}`;
   }
 }

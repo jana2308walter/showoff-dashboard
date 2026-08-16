@@ -5,12 +5,12 @@ import {
   StringCurrentWeatherConfig,
   WeatherKey
 } from '../../../model/weather';
-import { CardComponent } from './card/card.component';
+import { CurrentCardComponent } from './current-card/current-card.component';
 import { SiteTitleComponent } from '../../site-title/site-title.component';
 
 @Component({
   selector: 'sod-current-weather',
-  imports: [CardComponent, SiteTitleComponent],
+  imports: [CurrentCardComponent, SiteTitleComponent],
   templateUrl: './current-weather.component.html'
 })
 export class CurrentWeatherComponent {
