@@ -1,4 +1,5 @@
 @use '../base/sizes';
+@use '../base/typography';
 
 .page {
   display: grid;
@@ -6,9 +7,23 @@
   width: 100vw;
   height: 100vh;
   overflow: auto;
+  hyphens: auto;
 }
 
 .content {
   grid-area: content;
   padding: sizes.$spacing7;
+}
+
+.site-title {
+  @include typography.headline-1;
+
+  margin-bottom: sizes.$spacing4;
+}
+
+.site-subtitle {
+  @include typography.headline-3;
+
+  color: var(--gray);
+  margin-bottom: sizes.$spacing8;
 }

@@ -6,10 +6,11 @@ import {
   WeatherKey
 } from '../../../model/weather';
 import { CardComponent } from './card/card.component';
+import { SiteTitleComponent } from '../site-title/site-title.component';
 
 @Component({
   selector: 'sod-current-weather',
-  imports: [CardComponent],
+  imports: [CardComponent, SiteTitleComponent],
   templateUrl: './current-weather.component.html'
 })
 export class CurrentWeatherComponent {
