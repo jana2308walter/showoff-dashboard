@@ -5,6 +5,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  overflow: auto;
   grid-area: nav;
   padding: sizes.$spacing7;
   background: linear-gradient(to bottom, var(--lightblue), var(--mint), var(--cyan));
