@@ -6,9 +6,11 @@
   justify-content: flex-start;
   align-items: flex-start;
   grid-area: nav;
-  gap: sizes.$spacing6;
   padding: sizes.$spacing7;
-  background-color: var(--cyan);
+  background: linear-gradient(to bottom, var(--lightblue), var(--mint), var(--cyan));
+  box-shadow:
+    0 sizes.$spacing4 sizes.$spacing8 var(--black-10),
+    inset 0 sizes.$spacing1 sizes.$spacing1 var(--white-60);
 }
 
 .nav__item {
@@ -16,18 +18,25 @@
   justify-content: flex-start;
   align-items: center;
   gap: sizes.$spacing5;
+  width: 100%;
+  padding: sizes.$spacing6;
+  border-bottom: sizes.$spacing1 solid var(--transparent);
+
+  &:visited {
+    .icon,
+    .label {
+      text-decoration: none;
+    }
+  }
 
   &:hover,
   &:active,
   &:focus,
-  &:visited,
   &.is-active {
-    .icon {
-      text-decoration: none;
-    }
-
-    .label {
-      text-decoration: underline;
-    }
+    color: var(--white);
+    border-radius: sizes.$spacing6;
+    text-decoration: none;
+    background-color: var(--black-35);
+    border-color: var(--lightblue);
   }
 }
