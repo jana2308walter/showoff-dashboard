@@ -17,15 +17,16 @@
 
 .card {
   display: flex;
-  gap: sizes.$spacing7;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   width: calc((100% - (3 * #{sizes.$spacing7})) / 4);
-  min-width: sizes.$spacing23;
   padding: sizes.$spacing7 sizes.$spacing6;
+  text-align: center;
   color: var(--white);
   border-radius: sizes.$spacing7;
+  gap: sizes.$spacing7;
+  min-width: sizes.$spacing23;
   text-shadow: sizes.$spacing1 sizes.$spacing1 sizes.$spacing2 var(--black);
   min-height: sizes.$spacing23;
 
@@ -54,10 +55,9 @@
   }
 
   .title {
-    @include typography.headline-4;
+    @include typography.headline-3;
 
     font-size: sizes.$spacing7;
-    text-align: center;
   }
 
   .value {
