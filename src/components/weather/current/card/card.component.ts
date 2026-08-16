@@ -11,6 +11,7 @@ export class CardComponent {
   readonly $subtitles = input<string[]>([], { alias: 'subtitles' });
 
   readonly $color = input<CardColor>('transparent', { alias: 'color' });
+  readonly $hasSmallValueText = input(false, { alias: 'hasSmallValueText' });
 
   protected readonly $mappedValues = computed(() => {
     const values = this.$values();

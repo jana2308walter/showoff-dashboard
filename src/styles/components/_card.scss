@@ -1,35 +1,85 @@
 @use '../base/sizes';
+@use '../base/typography';
+
+@mixin gradient($first-color, $second-color, $third-color) {
+  $first: color-mix(in srgb, var(--white) 50%, $first-color);
+  $second: color-mix(in srgb, var(--white) 50%, $second-color);
+  $third: color-mix(in srgb, var(--white) 50%, $third-color);
+
+  background:
+    linear-gradient(var(--black-15), var(--black-5)),
+    linear-gradient(135deg, $first, $second, $third);
+  border: sizes.$spacing1 solid var(--white-45);
+  box-shadow:
+    0 sizes.$spacing4 sizes.$spacing8 var(--black-10),
+    inset 0 sizes.$spacing1 sizes.$spacing1 var(--white-60);
+}
 
 .card {
   display: flex;
+  gap: sizes.$spacing7;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   width: calc((100% - (3 * #{sizes.$spacing7})) / 4);
-  padding: sizes.$spacing5;
-  border-radius: sizes.$spacing4;
+  min-width: sizes.$spacing23;
+  padding: sizes.$spacing7 sizes.$spacing6;
+  color: var(--white);
+  border-radius: sizes.$spacing7;
+  text-shadow: sizes.$spacing1 sizes.$spacing1 sizes.$spacing2 var(--black);
+  min-height: sizes.$spacing23;
 
   &.is-orange {
-    background-color: orange;
+    @include gradient(var(--yellow), var(--orange), var(--red));
   }
 
   &.is-yellow {
-    background-color: yellow;
+    @include gradient(var(--orange), var(--yellow), var(--lime));
   }
 
   &.is-green {
-    background-color: lawngreen;
+    @include gradient(var(--yellow), var(--lime), var(--green));
   }
 
   &.is-lightblue {
-    background-color: cyan;
+    @include gradient(var(--lightblue), var(--mint), var(--cyan));
   }
 
   &.is-darkblue {
-    background-color: darkcyan;
+    @include gradient(var(--indigo), var(--blue), var(--lightblue));
   }
 
   &.is-violet {
-    background-color: darkmagenta;
+    @include gradient(var(--indigo), var(--violet), var(--pink));
+  }
+
+  .title {
+    @include typography.headline-4;
+
+    font-size: sizes.$spacing7;
+    text-align: center;
+  }
+
+  .value {
+    display: flex;
+    flex-direction: column;
+    gap: sizes.$spacing4;
+  }
+
+  .value__content {
+    @include typography.headline-3;
+
+    font-size: sizes.$spacing9;
+    font-weight: 500;
+
+    &.is-small {
+      font-size: sizes.$spacing8;
+    }
+  }
+
+  .subtitle {
+    @include typography.bold-text;
+
+    font-size: sizes.$spacing7;
   }
 }

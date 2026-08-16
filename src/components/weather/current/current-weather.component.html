@@ -1,4 +1,4 @@
-<h1>Aktuelles Wetter ({{ $time().value }})</h1>
+<h1 class="site-title">Aktuelles Wetter ({{ $time().value }})</h1>
 
 <div class="card-group">
   <sod-card
@@ -48,6 +48,7 @@
 
   <sod-card
     [color]="'green'"
+    [hasSmallValueText]="true"
     [title]="getCloudCoverLabel($cloudCoverLow(), true)"
     [values]="[
       getCloudCoverLabel($cloudCoverLow()),

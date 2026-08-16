@@ -53,7 +53,7 @@ export class CurrentWeatherComponent {
     return {
       key: property.key,
       label: property.label,
-      value: (property.value || '').toString(),
+      value: (property.value ?? '').toString(),
       unit: property.unit || ''
     };
   }

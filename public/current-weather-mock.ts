@@ -25,14 +25,14 @@ const currentWeatherMock: CurrentWeatherConfig[] = [
   {
     key: 'precipitationProbability',
     apiKey: 'precipitation_probability',
-    label: 'Niederschlagswahrscheinlichkeit',
+    label: 'Niederschlag',
     unit: '%',
     value: 100
   },
   {
     key: 'precipitation',
     apiKey: 'precipitation',
-    label: 'Niederschlagssumme',
+    label: 'Summe',
     unit: 'mm',
     value: 0
   },
@@ -52,21 +52,21 @@ const currentWeatherMock: CurrentWeatherConfig[] = [
   {
     key: 'cloudCoverLow',
     apiKey: 'cloud_cover_low',
-    label: 'Wolkenbedeckung (Niedrig)',
+    label: 'Wolken (Niedrig)',
     unit: '%',
     value: 46
   },
   {
     key: 'cloudCoverMid',
     apiKey: 'cloud_cover_mid',
-    label: 'Wolkenbedeckung (Mittel)',
+    label: 'Wolken (Mittel)',
     unit: '%',
     value: 100
   },
   {
     key: 'cloudCoverHigh',
     apiKey: 'cloud_cover_high',
-    label: 'Wolkenbedeckung (Hoch)',
+    label: 'Wolken (Hoch)',
     unit: '%',
     value: 100
   },
@@ -80,7 +80,7 @@ const currentWeatherMock: CurrentWeatherConfig[] = [
   {
     key: 'windSpeed',
     apiKey: 'wind_speed_10m',
-    label: 'Windgeschwindigkeit',
+    label: 'Wind',
     unit: 'km/h',
     value: 19
   },
@@ -94,7 +94,7 @@ const currentWeatherMock: CurrentWeatherConfig[] = [
   {
     key: 'windGusts',
     apiKey: 'wind_gusts_10m',
-    label: 'Windböen',
+    label: 'Böen',
     unit: 'km/h',
     value: 46
   },

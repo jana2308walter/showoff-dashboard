@@ -1,5 +1,25 @@
 :root {
   --white: #fff;
   --black: #000;
+  --red: #f00f;
+  --orange: #f80f;
+  --yellow: #ff0f;
+  --lime: #cf0f;
+  --green: #0f0f;
+  --mint: #0ff8;
   --cyan: #0fff;
+  --lightblue: #5cf;
+  --blue: #00ff;
+  --indigo: #40c;
+  --violet: #80f;
+  --pink: #f4a;
+
+  // Transparent Black
+  --black-5: rgb(0 0 0 / 5%);
+  --black-10: rgb(0 0 0 / 10%);
+  --black-15: rgb(0 0 0 / 15%);
+
+  // Transparent White
+  --white-45: rgb(255 255 255 / 45%);
+  --white-60: rgb(255 255 255 / 60%);
 }

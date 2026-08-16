@@ -1,4 +1,11 @@
 @use '../base/sizes';
+@use '../base/typography';
+
+.site-title {
+  @include typography.headline-1;
+
+  margin-bottom: sizes.$spacing7;
+}
 
 .card-group {
   display: flex;
