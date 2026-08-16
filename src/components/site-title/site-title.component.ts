@@ -5,6 +5,6 @@ import { Component, input } from '@angular/core';
   templateUrl: './site-title.component.html'
 })
 export class SiteTitleComponent {
-  $title = input('', { alias: 'title' });
-  $subtitle = input('', { alias: 'subtitle' });
+  readonly $title = input('', { alias: 'title' });
+  readonly $subtitle = input('', { alias: 'subtitle' });
 }

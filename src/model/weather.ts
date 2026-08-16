@@ -11,7 +11,9 @@ export interface Weather {
 
 export type CurrentWeatherConfig = WeatherConfig<string | number>;
 
-export type ForecastWeatherConfig = WeatherConfig<{ id: string; value: string | number }[]>;
+export type ForecastWeather = WeatherConfig<{ id: string; value: string | number }[]>;
+
+export type ForecastWeatherConfig = Partial<Record<WeatherKey, WeatherConfig<string | number>>>;
 
 export interface WeatherConfig<T> {
   key: WeatherKey;
@@ -22,8 +24,6 @@ export interface WeatherConfig<T> {
 }
 
 export type StringCurrentWeatherConfig = StringWeatherConfig<string>;
-
-export type StringForecastWeatherConfig = StringWeatherConfig<{ id: string; value: string }[]>;
 
 export interface StringWeatherConfig<T> {
   key: WeatherKey;

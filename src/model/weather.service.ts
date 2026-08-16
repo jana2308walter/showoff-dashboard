@@ -6,6 +6,7 @@ import { Injectable, resource, signal } from '@angular/core';
 import {
   Coordinates,
   CurrentWeatherConfig,
+  ForecastWeather,
   ForecastWeatherConfig,
   Weather,
   WeatherKey
@@ -103,7 +104,7 @@ export class WeatherService {
   }
 
   private mapWeatherConfigToApiKeys(
-    weatherConfigs: CurrentWeatherConfig[] | ForecastWeatherConfig[]
+    weatherConfigs: CurrentWeatherConfig[] | ForecastWeather[]
   ): string[] {
     return weatherConfigs.map((weather) => weather.apiKey || '').filter(Boolean);
   }
@@ -159,7 +160,7 @@ export class WeatherService {
   private transformForecast(
     forecast: any,
     utcOffsetSeconds: number,
-    initial: ForecastWeatherConfig[]
+    initial: ForecastWeather[]
   ): ForecastWeatherConfig[] {
     if (!forecast) {
       return [];
@@ -172,20 +173,35 @@ export class WeatherService {
       utcOffsetSeconds
     );
 
-    return initial.map((item, index) => {
+    const parsedData = initial.map((item, index) => {
       const isTimeItem = item.key === 'time';
       const isDateItem = item.key === 'sunrise' || item.key === 'sunset';
+
       const values = isTimeItem
         ? times
         : isDateItem
           ? this.getDateArray(forecast, index, utcOffsetSeconds)
           : this.getValueArray(forecast, index);
+
       const parsedValues = this.parseArrayData(values, !!item.unit, item.key);
 
       return {
-        ...item,
-        value: parsedValues
-      } as ForecastWeatherConfig;
+        config: item,
+        values: parsedValues
+      };
+    });
+
+    return times.map((_, index) => {
+      const result: ForecastWeatherConfig = {};
+
+      parsedData.forEach(({ config, values }) => {
+        result[config.key] = {
+          ...config,
+          value: values[index]?.value
+        };
+      });
+
+      return result;
     });
   }
 }
