@@ -6,7 +6,7 @@ import {
   WeatherKey
 } from '../../../model/weather';
 import { CardComponent } from './card/card.component';
-import { SiteTitleComponent } from '../site-title/site-title.component';
+import { SiteTitleComponent } from '../../site-title/site-title.component';
 
 @Component({
   selector: 'sod-current-weather',
