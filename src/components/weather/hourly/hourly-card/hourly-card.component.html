@@ -1,0 +1,28 @@
+@let weather = $weather();
+
+@if (weather) {
+  <div class="hourly-card__header">
+    <p>{{ getTime(weather.time) }}</p>
+    <p>Icon</p>
+    <p>{{ weather.temperature?.value }} {{ weather.temperature?.unit }}</p>
+    <p>Gefühlt: {{ weather.apparentTemperature?.value }} {{ weather.apparentTemperature?.unit }}</p>
+  </div>
+
+  <div class="hourly-card__content">
+    <sod-hourly-data [data]="weather.weatherCode"></sod-hourly-data>
+    <sod-hourly-data [data]="weather.precipitationProbability"></sod-hourly-data>
+    <sod-hourly-data [data]="weather.precipitation"></sod-hourly-data>
+    <sod-hourly-data [data]="weather.windSpeed"></sod-hourly-data>
+    <sod-hourly-data [data]="weather.windDirection"></sod-hourly-data>
+    <sod-hourly-data [data]="weather.windGusts"></sod-hourly-data>
+    <sod-hourly-data [data]="weather.humidity"></sod-hourly-data>
+    <sod-hourly-data [data]="weather.pressure"></sod-hourly-data>
+
+    <sod-hourly-data
+      [items]="getCloudCover(weather.cloudCoverLow, weather.cloudCoverMid, weather.cloudCoverHigh)"
+    ></sod-hourly-data>
+
+    <sod-hourly-data [data]="weather.uvIndex"></sod-hourly-data>
+    <sod-hourly-data [data]="weather.visibility"></sod-hourly-data>
+  </div>
+}

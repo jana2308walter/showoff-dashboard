@@ -1,0 +1,19 @@
+@use '../base/sizes';
+
+.hourly-card {
+  background: cyan;
+  border-radius: sizes.$spacing7;
+
+  .hourly-card__header {
+    background-color: darkcyan;
+    padding: sizes.$spacing6;
+    border-top-left-radius: sizes.$spacing7;
+    border-top-right-radius: sizes.$spacing7;
+  }
+
+  .hourly-card__content {
+    padding: sizes.$spacing6;
+    border-bottom-left-radius: sizes.$spacing7;
+    border-bottom-right-radius: sizes.$spacing7;
+  }
+}

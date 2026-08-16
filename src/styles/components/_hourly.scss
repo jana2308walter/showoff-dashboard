@@ -1,0 +1,6 @@
+@use '../base/sizes';
+
+.hourly-content {
+  display: flex;
+  gap: sizes.$spacing7;
+}

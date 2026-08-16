@@ -1,11 +1,7 @@
-<h1>Stündliches Wetter</h1>
+<sod-site-title [title]="'Stündliches Wetter'" [subtitle]="$formattedDate()"></sod-site-title>
 
-<div>
-  @for (hourlyWeather of $hourlyWeathers(); track hourlyWeather.key) {
-    <h5>{{ hourlyWeather.label }}</h5>
-
-    @for (parsedValue of hourlyWeather.value; track parsedValue.id) {
-      <p>{{ parsedValue.value }} {{ hourlyWeather.unit }}</p>
-    }
+<div class="hourly-content">
+  @for (weather of $hourlyWeathers(); track weather.time) {
+    <sod-hourly-card [weather]="weather"></sod-hourly-card>
   }
 </div>

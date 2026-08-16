@@ -1,6 +1,6 @@
-import { ForecastWeatherConfig } from './weather';
+import { ForecastWeather } from './weather';
 
-export const HOURLY_WEATHERS: ForecastWeatherConfig[] = [
+export const HOURLY_WEATHERS: ForecastWeather[] = [
   { key: 'temperature', apiKey: 'temperature_2m', label: 'Temperatur', unit: '°C' }, // Temperatur in Celsius, 2m über Boden
   {
     key: 'apparentTemperature',

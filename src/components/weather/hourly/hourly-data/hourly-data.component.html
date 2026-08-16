@@ -1,0 +1,17 @@
+<p>Icon</p>
+
+<div>
+  @if ($data(); as data) {
+    <p>{{ data.label }}</p>
+    <p>{{ getValue(data.value, data.unit) }}</p>
+  }
+
+  @if ($items(); as items) {
+    <p>{{ items[0]?.label }}</p>
+
+    @for (item of items; track item?.label) {
+      <p>{{ item?.label }}</p>
+      <p>{{ getValue(item?.value, item?.unit) }}</p>
+    }
+  }
+</div>

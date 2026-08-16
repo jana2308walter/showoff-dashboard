@@ -1,0 +1,6 @@
+@use '../base/sizes';
+
+.hourly-data {
+  display: flex;
+  gap: sizes.$spacing5;
+}

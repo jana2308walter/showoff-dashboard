@@ -1,6 +1,6 @@
-import { ForecastWeatherConfig } from '../src/model/weather';
+import { ForecastWeather } from '../src/model/weather';
 
-const hourlyWeatherMock: ForecastWeatherConfig[] = [
+const hourlyWeatherMock: ForecastWeather[] = [
   {
     key: 'temperature',
     apiKey: 'temperature_2m',
